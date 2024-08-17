@@ -12,6 +12,9 @@ const manifest: ManifestType = {
     default_popup: 'src/popup/index.html',
     default_icon: 'icon-34.png',
   },
+  permissions: [
+    'storage'
+  ],
   chrome_url_overrides: {
     newtab: 'src/newtab/index.html',
   },
