@@ -1,11 +1,11 @@
 import { SETTING } from '@src/constant';
-import { useState, useEffect } from 'preact/hooks';
+import { useState, useLayoutEffect } from 'preact/hooks';
 
 export const useSettings = () => {
   const [instanceUrl, setInstanceUrl] = useState('');
   const [password, setPassword] = useState('');
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     chrome.storage.local.get([SETTING.KEY]).then(item => {
       setInstanceUrl(item[SETTING.KEY][SETTING.INSTANCE_URL]);
       setPassword(item[SETTING.KEY][SETTING.PASSWORD]);

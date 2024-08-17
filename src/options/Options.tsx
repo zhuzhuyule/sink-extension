@@ -1,17 +1,15 @@
 import { Logo } from '@src/assets/img/logo';
-import { SETTING } from '@src/constant';
 import { get } from '@src/util';
-import { h } from 'preact';
+import { useSettings } from '@src/util/useSettings';
 import { useEffect, useState } from 'preact/hooks';
 import { FormError } from './FormError';
-import { useSettings } from '@src/util/useSettings';
 import { JumpLink } from './JumpLink';
 
 const URL_REG =
   /^(https?:\/\/)?([a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+)(:[0-9]{1,5})?(\/.*)?$/;
 
 const Options = () => {
-  const [links, setLinks] = useState<{ slug: string; url: string }[]>([]);
+  const [links, setLinks] = useState<{ slug: string; url: string }[]>();
   const [isLoging, setIsLoging] = useState(false);
   const { instanceUrl, setInstanceUrl, password, setPassword, updateStorage } =
     useSettings();
@@ -37,24 +35,31 @@ const Options = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  const queryLinks = () => {
+    get('/api/link/list?limit=30&cursor')
+      .then(data => {
+        if (data.statusMessage) {
+          throw Error();
+        }
+        setLinks(data.links);
+      })
+      .catch(() => {
+        setLinks(undefined);
+        setErrors({ login: 'Please check your instance url/password' });
+      });
+  };
+
+  useEffect(() => {
+    queryLinks();
+  }, []);
+
   const handleSubmit = (e: Event) => {
     e.preventDefault();
 
     if (validateForm()) {
       setIsLoging(true);
       updateStorage()
-        .then(() =>
-          get('/api/link/list?limit=30&cursor')
-            .then(data => {
-              if (data.statusMessage) {
-                throw Error();
-              }
-              setLinks(data.links)
-            })
-            .catch(() => {
-              setErrors({ login: 'Please check your instance url/password' });
-            })
-        )
+        .then(() => queryLinks())
         .finally(() => setIsLoging(false));
     }
   };
@@ -73,7 +78,7 @@ const Options = () => {
               className='flex justify-between text-sm font-medium text-gray-700'
             >
               Instance URL*
-              <JumpLink link={links.length ? instanceUrl : ''} />
+              <JumpLink link={links ? instanceUrl : ''} />
             </label>
             <input
               id='username'
@@ -106,10 +111,10 @@ const Options = () => {
           <button
             type='submit'
             disabled={isLoging}
-            className='mt-8 w-full rounded-md border border-transparent bg-gray-800 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2'
+            className={`${links ? 'w-30' : 'w-full'} mt-8 rounded-md border border-transparent bg-gray-800 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2`}
             onClick={handleSubmit}
           >
-            {isLoging ? 'Loging...' : 'Login'}
+            {isLoging ? 'Loging...' : links ? 'Update' : 'Login'}
           </button>
         </div>
         <p className='mt-4 text-right text-xs text-gray-500'>
