@@ -1,0 +1,16 @@
+name: Build and run tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: fell-lucas/setup-pnpm-action@v2
+      - run: pnpm build
+      - run: pnpm test
