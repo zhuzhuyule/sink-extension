@@ -1,9 +1,12 @@
 import { Logo } from '@src/assets/img/logo';
 import { SETTING } from '@src/constant';
+import { get } from '@src/util';
 import { h } from 'preact';
-import { useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
+import { FormError } from './FormError';
 
-const URL_REG = /^(https?:\/\/)?([a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+)(:[0-9]{1,5})?(\/.*)?$/
+const URL_REG =
+  /^(https?:\/\/)?([a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+)(:[0-9]{1,5})?(\/.*)?$/;
 
 const Options = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -12,7 +15,15 @@ const Options = () => {
   const [errors, setErrors] = useState<{
     instanceUrl?: string;
     password?: string;
+    login?: string;
   }>({});
+
+  useEffect(() => {
+    chrome.storage.local.get([SETTING.KEY]).then(item => {
+      setInstanceUrl(item[SETTING.KEY][SETTING.INSTANCE_URL]);
+      setPassword(item[SETTING.KEY][SETTING.PASSWORD]);
+    });
+  }, []);
 
   const handleUsernameChange = (e: any) => setInstanceUrl(e.target.value);
   const handlePasswordChange = (e: any) => setPassword(e.target.value);
@@ -37,12 +48,26 @@ const Options = () => {
 
     if (validateForm()) {
       setIsLogin(true);
-      chrome.storage.local.set({
-        [SETTING.KEY]: {
-          [SETTING.INSTANCE_URL]: instanceUrl,
-          [SETTING.PASSWORD]: password,
-        },
-      });
+      chrome.storage.local
+        .set({
+          [SETTING.KEY]: {
+            [SETTING.INSTANCE_URL]: instanceUrl,
+            [SETTING.PASSWORD]: password,
+          },
+        })
+        .then(() =>
+          get('/api/link/list?limit=30&cursor')
+            .then(data => {
+              if (data.statusMessage) {
+                throw Error();
+              }
+              console.log(data);
+            })
+            .catch(() => {
+              setErrors({ login: 'Please check your instance url/password' });
+            })
+        )
+        .finally(() => setIsLogin(false));
     }
   };
 
@@ -94,9 +119,7 @@ const Options = () => {
               onChange={handleUsernameChange}
               className='mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-gray-800 focus:outline-none focus:ring-gray-800 sm:text-sm'
             />
-            {errors.instanceUrl && (
-              <p className='mt-1 text-xs text-red-500'>{errors.instanceUrl}</p>
-            )}
+            <FormError error={errors.instanceUrl} />
           </div>
           <div>
             <label
@@ -114,12 +137,11 @@ const Options = () => {
               className='mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-gray-800 focus:outline-none focus:ring-gray-800 sm:text-sm'
             />
           </div>
-          {errors.password && (
-            <p className='mt-1 text-xs text-red-500'>{errors.password}</p>
-          )}
+          <FormError error={errors.password} />
+          <FormError error={errors.login} />
           <button
             type='submit'
-            className='w-full rounded-md border border-transparent bg-gray-800 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2'
+            className='mt-4 w-full rounded-md border border-transparent bg-gray-800 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2'
             onClick={handleSubmit}
           >
             Login
