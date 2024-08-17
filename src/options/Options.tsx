@@ -3,6 +3,8 @@ import { SETTING } from '@src/constant';
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
 
+const URL_REG = /^(https?:\/\/)?([a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+)(:[0-9]{1,5})?(\/.*)?$/
+
 const Options = () => {
   const [isLogin, setIsLogin] = useState(false);
   const [instanceUrl, setInstanceUrl] = useState('');
@@ -15,11 +17,19 @@ const Options = () => {
   const handleUsernameChange = (e: any) => setInstanceUrl(e.target.value);
   const handlePasswordChange = (e: any) => setPassword(e.target.value);
   const validateForm = () => {
-    setErrors({
-      instanceUrl: instanceUrl ? '' : 'Inststance URL is required',
-      password: password ? '' : 'Password is required',
-    });
-    return instanceUrl && password;
+    const newErrors: { instanceUrl?: string; password?: string } = {};
+
+    if (!instanceUrl) {
+      newErrors.instanceUrl = 'Instance URL is required';
+    } else if (!URL_REG.test(instanceUrl)) {
+      newErrors.instanceUrl = 'Instance URL is invalid';
+    }
+    if (!password) {
+      newErrors.password = 'Password is required';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e: Event) => {
@@ -29,8 +39,8 @@ const Options = () => {
       setIsLogin(true);
       chrome.storage.local.set({
         [SETTING.KEY]: {
-          [SETTING.INSTANCE_URL]:instanceUrl,
-          [SETTING.PASSWORD]:password,
+          [SETTING.INSTANCE_URL]: instanceUrl,
+          [SETTING.PASSWORD]: password,
         },
       });
     }
