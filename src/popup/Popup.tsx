@@ -13,7 +13,7 @@ export default function Popup() {
   const { instanceUrl } = useSettings();
 
   return (
-    <div class='w-full min-w-[450px] px-4 pt-4'>
+    <div class='w-full min-w-[450px] p-5 pb-1'>
       <div class='flex items-center justify-center text-lg'>
         <Logo size={30} />
         <h2 class='ml-2 font-bold'>Skin</h2>
