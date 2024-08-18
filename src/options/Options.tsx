@@ -10,7 +10,8 @@ const URL_REG =
   /^(https?:\/\/)?([a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+)(:[0-9]{1,5})?(\/.*)?$/;
 
 const Options = () => {
-  const [links, setLinks] = useState<{ slug: string; url: string; id: string }[]>();
+  const [links, setLinks] =
+    useState<{ slug: string; url: string; id: string }[]>();
   const [isLoging, setIsLoging] = useState(false);
   const { instanceUrl, setInstanceUrl, password, setPassword, updateStorage } =
     useSettings();
@@ -125,9 +126,11 @@ const Options = () => {
           </a>
         </p>
         <div>
-      {links?.map(link => <LinkTag key={link.id} shortKey={link.slug} url={link.url} />)}
+          {links?.map(link => (
+            <LinkTag key={link.id} shortKey={link.slug} url={link.url} />
+          ))}
+        </div>
       </div>
-      </div>     
     </div>
   );
 };
