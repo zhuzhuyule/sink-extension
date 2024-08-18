@@ -5,6 +5,7 @@ import { useEffect, useState } from 'preact/hooks';
 import { FormError } from './FormError';
 import { JumpLink } from './JumpLink';
 import LinkTag from './LinkTag';
+import { MY_GITHUB } from '@src/constant';
 
 const URL_REG =
   /^(https?:\/\/)?([a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+)(:[0-9]{1,5})?(\/.*)?$/;
@@ -121,7 +122,7 @@ const Options = () => {
         </div>
         <p className='mt-4 text-right text-xs text-gray-500'>
           Create by{' '}
-          <a className='text-blue-500' href='https://ause.cc/github'>
+          <a className='text-blue-500' href={MY_GITHUB}>
             zhuzhuyule
           </a>
         </p>

@@ -37,7 +37,7 @@ export const NewShortURL = () => {
     <div class='flex w-full flex-col items-center justify-center'>
       <div className='flex w-full items-center justify-center'>
         <span className='text-foreground bg-secondary inline-flex h-10 w-10 shrink-0 select-none items-center justify-center overflow-hidden rounded-full text-xs font-normal'>
-          <Svg src={avatarUrl} alt={key} class='object-cover' />
+          <Svg src={avatarUrl} alt={key} class='object-cover shadow-md rounded-full overflow-hidden' />
         </span>
         <div className='flex flex-1 items-center justify-start overflow-hidden'>
           <div className='mr-[2px] truncate text-base font-bold leading-5'>
@@ -48,7 +48,7 @@ export const NewShortURL = () => {
             value={key}
             onInput={e => setKey(e.target?.value)}
             placeholder='slug'
-            className='flex-1 rounded-md border border-gray-300 px-1 py-1 text-base shadow-sm focus:border-gray-800 focus:outline-none focus:ring-gray-800'
+            className='flex-1 border-b border-b-gray-300 p-0 text-base shadow-sm focus:border-gray-800 focus:outline-none focus:ring-gray-800'
           />
           {copied ? (
             <Svg
@@ -66,7 +66,6 @@ export const NewShortURL = () => {
         </div>
       </div>
       <div class='flex w-full items-center justify-center gap-2'>
-        <div className='text-sm font-medium text-gray-700'>URL:</div>
         <input
           type='text'
           value={url}

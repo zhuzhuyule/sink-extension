@@ -6,6 +6,7 @@ import { NewShortURL } from './NewShortURL';
 import { Logo } from '@src/assets/img/logo';
 import { SplitLine } from '@src/components/SplitLine';
 import { useSettings } from '@src/util/useSettings';
+import { MY_GITHUB } from '@src/constant';
 
 export default function Popup() {
   const optionsUrl = chrome.runtime.getURL('src/options/index.html');
@@ -31,14 +32,16 @@ export default function Popup() {
             <a href={instanceUrl} target='_blank'>
               <Svg src={webSvg} />
             </a>
-            <a
-              href='https://github.com/zhuzhuyule/skin-extension'
-              target='_blank'
-              class='self-end'
-            >
+            <a href={MY_GITHUB} target='_blank'>
               <Svg src={githubSvg} />
             </a>
           </div>
+          <p className='text-right text-xs text-gray-500'>
+            Create by{' '}
+            <a className='text-blue-500' href={MY_GITHUB}>
+              zhuzhuyule
+            </a>
+          </p>
         </div>
       </div>
     </div>
