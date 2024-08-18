@@ -77,7 +77,7 @@ export const NewShortURL = () => {
       </div>
       <button
         // disabled={isLoging}
-        className={`w-full mt-2 self-end rounded-md border border-transparent bg-gray-800 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2`}
+        className={`w-full mt-2 self-end rounded-md border border-transparent bg-gray-800 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-900 focus:outline-none`}
         // onClick={handleSubmit}
       >
         Add
