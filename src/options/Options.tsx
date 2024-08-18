@@ -1,10 +1,12 @@
 import { Logo } from '@src/assets/img/logo';
-import { MY_GITHUB } from '@src/constant';
+import webSvg from '@src/assets/web.svg';
+import { Footer } from '@src/components/Footer';
+import { SplitLine } from '@src/components/SplitLine';
 import { get } from '@src/util';
 import { useSettings } from '@src/util/useSettings';
 import { useEffect, useState } from 'preact/hooks';
-import { FormError } from './FormError';
 import { JumpLink } from '../components/JumpLink';
+import { FormError } from './FormError';
 import LinkTag from './LinkTag';
 
 const URL_REG =
@@ -81,7 +83,11 @@ const Options = () => {
               className='flex justify-between text-sm font-medium text-gray-700'
             >
               Instance URL*
-              <JumpLink link={links ? `${instanceUrl}/dashboard/links` : ''} alt='Go to my Skin' />
+              <JumpLink
+                link={links ? `${instanceUrl}/dashboard/links` : ''}
+                svg={webSvg}
+                alt='Go to my Skin'
+              />
             </label>
             <input
               id='username'
@@ -120,13 +126,10 @@ const Options = () => {
             {isLoging ? 'Loging...' : links ? 'Update' : 'Login'}
           </button>
         </div>
-        <p className='mt-4 text-right text-xs text-gray-500'>
-          Create by{' '}
-          <a className='text-blue-500' href={MY_GITHUB}>
-            zhuzhuyule
-          </a>
-        </p>
-        <div>
+        <Footer hideSetting hideWeb />
+        <SplitLine />
+        {links ? '' : 'Not logged in yet'}
+        <div class=''>
           {links?.map(link => (
             <LinkTag key={link.id} shortKey={link.slug} url={link.url} />
           ))}

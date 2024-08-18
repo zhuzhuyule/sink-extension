@@ -1,19 +1,10 @@
-import githubSvg from '@src/assets/github.svg';
-import settingSvg from '@src/assets/setting.svg';
-import webSvg from '@src/assets/web.svg';
-import giftSvg from '@src/assets/gift.svg';
-import { Svg } from '@src/components/Svg';
-import { NewShortURL } from './NewShortURL';
+
 import { Logo } from '@src/assets/img/logo';
-import { SplitLine } from '@src/components/SplitLine';
-import { useSettings } from '@src/util/useSettings';
-import { MY_GITHUB } from '@src/constant';
-import { JumpLink } from '@src/components/JumpLink';
+import { NewShortURL } from './NewShortURL';
+import { Footer } from '@src/components/Footer';
+
 
 export default function Popup() {
-  const optionsUrl = chrome.runtime.getURL('src/options/index.html');
-  const { instanceUrl } = useSettings();
-
   return (
     <div class='w-full min-w-[450px] p-5 pb-1'>
       <div class='flex items-center justify-center text-lg'>
@@ -24,21 +15,8 @@ export default function Popup() {
         <div class='flex w-full flex-col items-center justify-center'>
           <NewShortURL />
         </div>
-        <div class='mt-5 mb-2 flex w-full items-center justify-between'>
-          <div class='flex items-center justify-start gap-2'>
-            <JumpLink link={optionsUrl} svg={settingSvg} alt='Open the setting page' />
-            <JumpLink link={instanceUrl} svg={webSvg} alt='Go to my Skin' />
-            <JumpLink link={MY_GITHUB} svg={githubSvg} alt='Go to Github' />
-            <JumpLink link={MY_GITHUB} svg={giftSvg} alt='Give a coffee' />
-          </div>
-          <p className='text-right text-xs text-gray-500'>
-            Create by{' '}
-            <a className='text-blue-500' href={MY_GITHUB}>
-              zhuzhuyule
-            </a>
-          </p>
-        </div>
       </div>
+      <Footer />
     </div>
   );
 }
