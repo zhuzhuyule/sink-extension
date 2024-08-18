@@ -18,8 +18,7 @@ export default function Popup() {
         <Logo size={30} />
         <h2 class='ml-2 font-bold'>Skin</h2>
       </div>
-      <SplitLine />
-      <div class='w-full'>
+      <div class='w-full mt-2'>
         <div class='flex w-full flex-col items-center justify-center'>
           <NewShortURL />
         </div>

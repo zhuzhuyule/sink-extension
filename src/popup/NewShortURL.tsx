@@ -40,7 +40,7 @@ export const NewShortURL = () => {
           <Svg
             src={avatarUrl}
             alt={key}
-            class='overflow-hidden rounded-full object-cover shadow-md'
+            class='overflow-hidden rounded-full object-cover shadow-lg'
           />
         </span>
         <div className='flex flex-1 items-center justify-start overflow-hidden'>
@@ -52,7 +52,7 @@ export const NewShortURL = () => {
             value={key}
             onInput={e => setKey(e.target?.value)}
             placeholder='slug'
-            className='flex-1 border-b border-b-gray-300 p-0 text-base shadow-sm focus:border-gray-800 focus:outline-none focus:ring-gray-800'
+            className='flex-1 border-b border-b-gray-200 p-0 text-base shadow-sm focus:border-gray-400 focus:outline-none focus:ring-gray-400'
           />
           {copied ? (
             <Svg
@@ -76,12 +76,12 @@ export const NewShortURL = () => {
           value={url}
           onInput={e => setUrl(e.target?.value)}
           placeholder='https://example.com'
-          className='flex-1 rounded-md border border-gray-300 px-2 py-1 text-gray-600 shadow-sm focus:border-gray-800 focus:outline-none focus:ring-gray-800 sm:text-sm'
+          className='flex-1 px-1 border-b border-b-gray-200 p-0 text-base shadow-sm focus:border-gray-400 focus:outline-none focus:ring-gray-400'
         />
       </div>
       <button
         // disabled={isLoging}
-        className={`mt-2 w-full self-end rounded-md border border-transparent bg-gray-800 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-900 focus:outline-none`}
+        className={`mt-3 w-full self-end rounded-md border border-transparent bg-gray-800 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-900 focus:outline-none`}
         // onClick={handleSubmit}
       >
         Add
