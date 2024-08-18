@@ -1,20 +1,22 @@
 import { useAvatar } from '@src/util/useAvatar';
-import { useEffect, useLayoutEffect, useState } from 'preact/hooks';
+import { useEffect, useLayoutEffect, useMemo, useState } from 'preact/hooks';
 
 import CopySvg from '@src/assets/copy.svg?react';
 import FlashSvg from '@src/assets/flash.svg?react';
 import SuccessSvg from '@src/assets/success.svg?react';
 import { Svg } from '@src/components/Svg';
-import { copyToClipboard, debounce, request } from '@src/util';
+import { copyToClipboard, debounce, request, throttle } from '@src/util';
 import { useSettings } from '@src/util/useSettings';
 
-import QRModal from './QRModal';
-import { FormError } from '@src/options/FormError';
 import { Button } from '@src/components/Button';
 import { LoadingIcon } from '@src/components/LoadingIcon';
+import { FormError } from '@src/options/FormError';
+import { ILink } from '@src/util/useLinks';
+import QRModal from './QRModal';
+import { link } from 'fs';
 
-export const NewShortURL = () => {
-  const [isEdit, setIsEdit] = useState(false);
+export const NewShortURL = ({ links }: { links: ILink[] }) => {
+  const [editLink, setEditLink] = useState<ILink | null>();
   const [isLoging, setIsLoging] = useState(false);
   const [isLoadSlug, setIsLoadSlug] = useState(false);
   const [url, setUrl] = useState('');
@@ -27,6 +29,8 @@ export const NewShortURL = () => {
     login?: string;
   }>({});
 
+  const warning = links.find(link => link.url === url && url !== editLink?.url);
+
   useLayoutEffect(() => {
     setErrors({});
   }, [key, url]);
@@ -36,6 +40,9 @@ export const NewShortURL = () => {
       if (tab?.url) {
         try {
           setUrl(tab.url);
+          const item = links.find(link => link.url === tab.url);
+          setEditLink(item);
+          item && setKey(item.slug);
         } catch {}
       }
     });
@@ -59,6 +66,8 @@ export const NewShortURL = () => {
     }
     if (!key) {
       newErrors.key = 'Please input short key';
+    } else if (links.some(link => link.slug === key)) {
+      newErrors.key = 'The slug has existed, please change it!';
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -71,8 +80,8 @@ export const NewShortURL = () => {
         url,
         slug: key,
       };
-      request(isEdit ? '/api/link/edit' : '/api/link/create', {
-        method: isEdit ? 'PUT' : 'POST',
+      request(editLink ? '/api/link/edit' : '/api/link/create', {
+        method: editLink ? 'PUT' : 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -81,8 +90,6 @@ export const NewShortURL = () => {
         .then(data => {
           if (data.statusCode === 409) {
             setErrors({ key: 'The slug key has been existed!' });
-          } else {
-            setIsEdit(true);
           }
         })
         .catch()
@@ -120,7 +127,6 @@ export const NewShortURL = () => {
               {`${instanceUrl}/`}
             </div>
             <input
-              type='text'
               value={key}
               onInput={handleKeyChange}
               placeholder='[Short Key]'
@@ -146,7 +152,7 @@ export const NewShortURL = () => {
           value={url}
           onInput={handleUrlChange}
           placeholder='https://example.com'
-          className='flex-1 border-b border-b-gray-200 p-0 px-1 text-base text-gray-400 shadow-sm focus:border-gray-400 focus:text-gray-700 focus:outline-none focus:ring-gray-400'
+          className='flex-1 border-b border-b-gray-200 p-0 px-1 text-base font-thin text-gray-400 shadow-sm focus:border-gray-400 focus:text-gray-700 focus:outline-none focus:ring-gray-400'
         />
         {isLoadSlug ? (
           <LoadingIcon size={24} />
@@ -160,6 +166,11 @@ export const NewShortURL = () => {
         <QRModal text={url} />
       </div>
       <div className='self-start'>
+        {warning ? (
+          <p className='mt-1 text-xs text-yellow-400'>
+            The url has been existed with '<b>{warning.slug}</b>'
+          </p>
+        ) : null}
         <FormError error={errors.url} />
         <FormError error={errors.login} />
       </div>
@@ -168,7 +179,7 @@ export const NewShortURL = () => {
         loading={isLoging}
         onClick={e => handleSubmit(e)}
       >
-        Add
+        {editLink?.url == url ? 'Edit' : 'Add'}
       </Button>
     </div>
   );

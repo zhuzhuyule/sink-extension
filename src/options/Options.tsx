@@ -4,17 +4,17 @@ import { Footer } from '@src/components/Footer';
 import { SplitLine } from '@src/components/SplitLine';
 import { request } from '@src/util';
 import { useSettings } from '@src/util/useSettings';
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useLayoutEffect, useState } from 'preact/hooks';
 import { JumpLink } from '../components/JumpLink';
 import { FormError } from './FormError';
 import LinkTag from './LinkTag';
+import { useLinks } from '@src/util/useLinks';
 
 const URL_REG =
   /^(https?:\/\/)?([a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+)(:[0-9]{1,5})?(\/.*)?$/;
 
 const Options = () => {
-  const [links, setLinks] =
-    useState<{ slug: string; url: string; id: string }[]>();
+  const { links, queryLinks } = useLinks();
   const [isLoging, setIsLoging] = useState(false);
   const { instanceUrl, setInstanceUrl, password, setPassword, updateStorage } =
     useSettings();
@@ -40,34 +40,24 @@ const Options = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const queryLinks = () => {
-    request('/api/link/list?limit=100&cursor')
-      .then(data => {
-        if (data.statusMessage) {
-          throw Error();
-        }
-        setLinks(data.links);
-      })
-      .catch(() => {
-        setLinks(undefined);
-        setErrors({ login: 'Please check your instance url/password' });
-      });
-  };
-
-  useEffect(() => {
-    queryLinks();
-  }, []);
-
   const handleSubmit = (e: Event) => {
     e.preventDefault();
 
     if (validateForm()) {
       setIsLoging(true);
       updateStorage()
-        .then(() => queryLinks())
+        .then(() =>
+          queryLinks(100, () => {
+            setErrors({ login: 'Please check your instance url/password' });
+          })
+        )
         .finally(() => setIsLoging(false));
     }
   };
+
+  useLayoutEffect(() => {
+    setErrors({});
+  }, [instanceUrl, password]);
 
   return (
     <div className='flex min-h-screen items-center justify-center bg-gray-100'>
