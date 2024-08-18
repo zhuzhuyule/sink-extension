@@ -1,6 +1,7 @@
 import githubSvg from '@src/assets/github.svg';
 import settingSvg from '@src/assets/setting.svg';
 import webSvg from '@src/assets/web.svg';
+import giftSvg from '@src/assets/gift.svg';
 import { Svg } from '@src/components/Svg';
 import { NewShortURL } from './NewShortURL';
 import { Logo } from '@src/assets/img/logo';
@@ -28,6 +29,7 @@ export default function Popup() {
             <JumpLink link={optionsUrl} svg={settingSvg} alt='Open the setting page' />
             <JumpLink link={instanceUrl} svg={webSvg} alt='Go to my Skin' />
             <JumpLink link={MY_GITHUB} svg={githubSvg} alt='Go to Github' />
+            <JumpLink link={MY_GITHUB} svg={giftSvg} alt='Give a coffee' />
           </div>
           <p className='text-right text-xs text-gray-500'>
             Create by{' '}
