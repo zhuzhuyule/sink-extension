@@ -1,7 +1,5 @@
-import { Svg } from '@src/components/Svg';
-import { h } from 'preact';
-import { useEffect, useRef, useState } from 'preact/hooks';
-import qrcodeSvg from '@src/assets/qrcode.svg';
+import QrcodeSvg from '@src/assets/qrcode.svg?react';
+import { useState } from 'preact/hooks';
 import { QRImage } from './QRImage';
 
 export default function QRModal({ text }: { text: string }) {
@@ -12,9 +10,8 @@ export default function QRModal({ text }: { text: string }) {
 
   return (
     <div>
-      <Svg
-        src={qrcodeSvg}
-        className='ml-1 cursor-pointer text-green-500'
+      <QrcodeSvg
+        className='ml-1 cursor-pointer w-6 h-6'
         alt='Show QR Code'
         onClick={openModal}
       />

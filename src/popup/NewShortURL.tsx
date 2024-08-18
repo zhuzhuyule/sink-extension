@@ -11,10 +11,12 @@ import { useSettings } from '@src/util/useSettings';
 import QRModal from './QRModal';
 import { FormError } from '@src/options/FormError';
 import { Button } from '@src/components/Button';
+import { LoadingIcon } from '@src/components/LoadingIcon';
 
 export const NewShortURL = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [isLoging, setIsLoging] = useState(false);
+  const [isLoadSlug, setIsLoadSlug] = useState(false);
   const [url, setUrl] = useState('');
   const [key, setKey] = useState('');
   const [copied, setCopied] = useState(false);
@@ -90,6 +92,20 @@ export const NewShortURL = () => {
     }
   };
 
+  const handleRquest = debounce(
+    'slug-request',
+    () => {
+      setIsLoadSlug(true);
+      request(`/api/link/ai?url=${url}`)
+        .then(data => {
+          data?.slug && setKey(data.slug);
+        })
+        .catch()
+        .finally(() => setIsLoadSlug(false));
+    },
+    2000
+  );
+
   return (
     <div className='flex w-full flex-col items-center justify-center'>
       <div className='flex w-full items-center justify-center'>
@@ -110,7 +126,7 @@ export const NewShortURL = () => {
               placeholder='[Short Key]'
               className='flex-1 border-b border-b-gray-200 p-0 text-base shadow-sm focus:border-gray-400 focus:outline-none focus:ring-gray-400'
             />
-            {!copied ? (
+            {copied ? (
               <SuccessSvg className='ml-1 h-6 w-6 cursor-pointer text-green-500' />
             ) : (
               <CopySvg
@@ -132,23 +148,15 @@ export const NewShortURL = () => {
           placeholder='https://example.com'
           className='flex-1 border-b border-b-gray-200 p-0 px-1 text-base text-gray-400 shadow-sm focus:border-gray-400 focus:text-gray-700 focus:outline-none focus:ring-gray-400'
         />
-        <FlashSvg
-          onClick={() => {
-            debounce(
-              'slug-request',
-              () => {
-                request(`/api/link/ai?url=${url}`)
-                  .then(data => {
-                    data?.slug && setKey(data.slug);
-                  })
-                  .catch();
-              },
-              2000
-            )();
-          }}
-          className='ml-1 h-6 w-6 cursor-pointer'
-          alt='Quick generate slug'
-        />
+        {isLoadSlug ? (
+          <LoadingIcon size={24} />
+        ) : (
+          <FlashSvg
+            onClick={() => handleRquest()}
+            className='ml-1 h-6 w-6 cursor-pointer'
+            alt='Quick generate slug'
+          />
+        )}
         <QRModal text={url} />
       </div>
       <div className='self-start'>

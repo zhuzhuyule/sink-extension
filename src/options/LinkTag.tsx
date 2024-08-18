@@ -2,8 +2,8 @@ import { copyToClipboard } from '@src/util';
 import { useAvatar } from '@src/util/useAvatar';
 import { useState } from 'preact/hooks';
 
-import copySvg from '@src/assets/copy.svg';
-import successSvg from '@src/assets/success.svg';
+import CopySvg from '@src/assets/copy.svg?react';
+import SuccessSvg from '@src/assets/success.svg?react';
 import { Svg } from '@src/components/Svg';
 import { useSettings } from '@src/util/useSettings';
 import { JumpLink } from '../components/JumpLink';
@@ -44,13 +44,11 @@ const Tag = ({ shortKey, url, displayDate }: TagProps) => {
                 {shortKey}
               </div>
               {copied ? (
-                <Svg src={successSvg} size={20} className='ml-1 shrink-0' />
+                <SuccessSvg className='ml-1 shrink-0 w-5 h-5 text-green-500' />
               ) : (
-                <Svg
-                  src={copySvg}
+                <CopySvg
                   onClick={handleCopy}
-                  size={20}
-                  className='ml-1 shrink-0 cursor-pointer'
+                  className='ml-1 shrink-0 cursor-pointer w-5 h-5'
                   alt='Copy short link'
                 />
               )}
