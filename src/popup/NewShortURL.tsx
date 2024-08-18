@@ -5,7 +5,7 @@ import copySvg from '@src/assets/copy.svg';
 import flashSvg from '@src/assets/flash.svg';
 import successSvg from '@src/assets/success.svg';
 import { Svg } from '@src/components/Svg';
-import { copyToClipboard, request } from '@src/util';
+import { copyToClipboard, debounce, request } from '@src/util';
 import { useSettings } from '@src/util/useSettings';
 
 import QRModal from './QRModal';
@@ -83,9 +83,9 @@ export const NewShortURL = () => {
         <Svg
           src={avatarUrl}
           alt={key}
-          class='h-10 w-10 mr-2 select-none overflow-hidden rounded-full object-cover shadow-lg'
+          class='mr-2 h-10 w-10 select-none overflow-hidden rounded-full object-cover shadow-lg'
         />
-        <div class="flex-1">
+        <div class='flex-1'>
           <div className='flex items-center justify-start overflow-hidden'>
             <div className='mr-[2px] truncate text-base font-bold leading-5'>
               {`${instanceUrl}/`}
@@ -127,11 +127,17 @@ export const NewShortURL = () => {
         <Svg
           src={flashSvg}
           onClick={() => {
-            request(`/api/link/ai?url=${url}`)
-              .then(data => {
-                data?.slug && setKey(data.slug);
-              })
-              .catch();
+            debounce(
+              'slug-request',
+              () => {
+                request(`/api/link/ai?url=${url}`)
+                  .then(data => {
+                    data?.slug && setKey(data.slug);
+                  })
+                  .catch();
+              },
+              2000
+            )()
           }}
           className='ml-1 cursor-pointer'
           alt='Quick generate slug'

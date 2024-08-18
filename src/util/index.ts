@@ -1,6 +1,20 @@
 import { SETTING } from '@src/constant';
 import { useEffect, useState } from 'preact/hooks';
 
+const DEBOUNCE_KEY: Record<string, number> = {};
+
+export const debounce = (
+  key: string,
+  cb: (...param: any) => void,
+  duration: number = 100
+) => {
+  return function (...args: any) {
+    if (!DEBOUNCE_KEY[key] || Date.now() - DEBOUNCE_KEY[key] > duration) {
+      DEBOUNCE_KEY[key] = Date.now();
+      cb(...args);
+    }
+  };
+};
 
 export const request = async (api: string, options?: RequestInit) => {
   const setting = (await chrome.storage.local.get([SETTING.KEY]))[SETTING.KEY];
