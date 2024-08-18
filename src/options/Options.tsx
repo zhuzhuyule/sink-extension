@@ -24,7 +24,7 @@ const Options = () => {
     login?: string;
   }>({});
 
-  const handleUsernameChange = (e: any) => setInstanceUrl(e.target.value);
+  const handleInstanceUrlChange = (e: any) => setInstanceUrl(e.target.value);
   const handlePasswordChange = (e: any) => setPassword(e.target.value);
   const validateForm = () => {
     const newErrors: { instanceUrl?: string; password?: string } = {};
@@ -79,7 +79,7 @@ const Options = () => {
         <div className='space-y-4'>
           <div>
             <label
-              htmlFor='username'
+              htmlFor='instanceUrl'
               className='flex justify-between text-sm font-medium text-gray-700'
             >
               Instance URL*
@@ -90,11 +90,11 @@ const Options = () => {
               />
             </label>
             <input
-              id='username'
+              id='instanceUrl'
               type='text'
               placeholder='https://example.com'
               value={instanceUrl}
-              onChange={handleUsernameChange}
+              onInput={handleInstanceUrlChange}
               className='mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-gray-800 focus:outline-none focus:ring-gray-800 sm:text-sm'
             />
             <FormError error={errors.instanceUrl} />
@@ -111,7 +111,7 @@ const Options = () => {
               type='password'
               placeholder='Your Site Token'
               value={password}
-              onChange={handlePasswordChange}
+              onInput={handlePasswordChange}
               className='mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-gray-800 focus:outline-none focus:ring-gray-800 sm:text-sm'
             />
           </div>
