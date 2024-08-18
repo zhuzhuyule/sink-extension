@@ -1,5 +1,5 @@
 import { useAvatar } from '@src/util/useAvatar';
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useLayoutEffect, useState } from 'preact/hooks';
 
 import copySvg from '@src/assets/copy.svg';
 import flashSvg from '@src/assets/flash.svg';
@@ -10,8 +10,10 @@ import { useSettings } from '@src/util/useSettings';
 
 import QRModal from './QRModal';
 import { FormError } from '@src/options/FormError';
+import { Button } from '@src/components/Button';
 
 export const NewShortURL = () => {
+  const [isEdit, setIsEdit] = useState(false);
   const [isLoging, setIsLoging] = useState(false);
   const [url, setUrl] = useState('');
   const [key, setKey] = useState('');
@@ -22,6 +24,10 @@ export const NewShortURL = () => {
     url?: string;
     login?: string;
   }>({});
+
+  useLayoutEffect(() => {
+    setErrors({});
+  }, [key, url]);
 
   useEffect(() => {
     chrome.tabs.query({ active: true, currentWindow: true }).then(([tab]) => {
@@ -55,25 +61,32 @@ export const NewShortURL = () => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-  const handleSubmit = (e: Event) => {
+  const handleSubmit = async (e: Event) => {
     e.preventDefault();
     if (validateForm()) {
-      // setIsLoging(true);
-      // const link = {
-      //   url: formData.url,
-      //   slug: formData.slug,
-      //   ...(formData.optional || []),
-      //   expiration: formData.optional?.expiration
-      //     ? date2unix(formData.optional?.expiration, 'end')
-      //     : undefined,
-      // };
-      // const { link: newLink } = await useAPI(
-      //   isEdit ? '/api/link/edit' : '/api/link/create',
-      //   {
-      //     method: isEdit ? 'PUT' : 'POST',
-      //     body: link,
-      //   }
-      // );
+      setIsLoging(true);
+      const link = {
+        url,
+        slug: key,
+      };
+      request(isEdit ? '/api/link/edit' : '/api/link/create', {
+        method: isEdit ? 'PUT' : 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(link),
+      })
+        .then(data => {
+          if (data.statusCode === 409) {
+            setErrors({ key: 'The slug key has been existed!' });
+          } else {
+            setIsEdit(true);
+          }
+        })
+        .catch()
+        .finally(() => {
+          setIsLoging(false);
+        });
     }
   };
 
@@ -137,24 +150,24 @@ export const NewShortURL = () => {
                   .catch();
               },
               2000
-            )()
+            )();
           }}
           className='ml-1 cursor-pointer'
           alt='Quick generate slug'
         />
         <QRModal text={url} />
       </div>
-      <div>
+      <div class='self-start'>
         <FormError error={errors.url} />
         <FormError error={errors.login} />
       </div>
-      <button
-        // disabled={isLoging}
-        className={`mt-3 w-full self-end rounded-md border border-transparent bg-gray-800 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-900 focus:outline-none`}
-        onClick={handleSubmit}
+      <Button
+        class='mt-3 w-full'
+        loading={isLoging}
+        onClick={e => handleSubmit(e)}
       >
         Add
-      </button>
+      </Button>
     </div>
   );
 };

@@ -20,11 +20,13 @@ export const request = async (api: string, options?: RequestInit) => {
   const setting = (await chrome.storage.local.get([SETTING.KEY]))[SETTING.KEY];
   return fetch(
     `${setting[SETTING.INSTANCE_URL]}${api}`,
-    Object.assign(options || {}, {
+    {
+      ...options,
       headers: {
+        ...options?.headers,
         Authorization: `Bearer ${setting[SETTING.PASSWORD] || ''}`,
-      },
-    })
+      }
+    }
   ).then(res => res.json());
 };
 
