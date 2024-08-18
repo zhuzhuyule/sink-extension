@@ -79,7 +79,7 @@ export const NewShortURL = () => {
           value={url}
           onInput={e => setUrl(e.target?.value)}
           placeholder='https://example.com'
-          className='flex-1 border-b border-b-gray-200 p-0 px-1 text-base shadow-sm focus:border-gray-400 focus:outline-none focus:ring-gray-400'
+          className='flex-1 text-gray-400 focus:text-gray-700 border-b border-b-gray-200 p-0 px-1 text-base shadow-sm focus:border-gray-400 focus:outline-none focus:ring-gray-400'
         />
         <QRModal text={url} />
       </div>
