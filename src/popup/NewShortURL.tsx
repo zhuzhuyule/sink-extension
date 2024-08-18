@@ -7,7 +7,6 @@ import { Svg } from '@src/components/Svg';
 import { copyToClipboard } from '@src/util';
 import { useSettings } from '@src/util/useSettings';
 
-import QRCode from 'qrcode';
 import QRModal from './QRModal';
 
 export const NewShortURL = () => {

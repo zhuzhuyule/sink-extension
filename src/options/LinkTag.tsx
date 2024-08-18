@@ -1,13 +1,12 @@
 import { copyToClipboard } from '@src/util';
 import { useAvatar } from '@src/util/useAvatar';
-import { h } from 'preact';
 import { useState } from 'preact/hooks';
 
 import copySvg from '@src/assets/copy.svg';
-import successSvg from '@src/assets/success.svg';
 import openUrl from '@src/assets/openUrl.svg';
-import { useSettings } from '@src/util/useSettings';
+import successSvg from '@src/assets/success.svg';
 import { Svg } from '@src/components/Svg';
+import { useSettings } from '@src/util/useSettings';
 
 interface TagProps {
   shortKey: string;
@@ -33,11 +32,15 @@ const Tag = ({ shortKey, url, displayDate }: TagProps) => {
       <div className='flex flex-col space-y-3 p-4'>
         <div className='flex items-center justify-center space-x-3'>
           <span className='text-foreground bg-secondary inline-flex h-10 w-10 shrink-0 select-none items-center justify-center overflow-hidden rounded-full text-xs font-normal'>
-            <Svg class="rounded-full overflow-hidden" src={avatarUrl} alt={shortKey} />
+            <Svg
+              class='overflow-hidden rounded-full'
+              src={avatarUrl}
+              alt={shortKey}
+            />
           </span>
           <div className='w-[250px] flex-1 overflow-hidden'>
             <div className='flex items-center'>
-              <div className='text-lg mr-1 truncate font-bold leading-5'>
+              <div className='mr-1 truncate text-lg font-bold leading-5'>
                 {shortKey}
               </div>
               {copied ? (
@@ -48,11 +51,14 @@ const Tag = ({ shortKey, url, displayDate }: TagProps) => {
                   onClick={handleCopy}
                   size={20}
                   className='ml-1 shrink-0 cursor-pointer'
-                  alt="Copy short link"
+                  alt='Copy short link'
                 />
               )}
             </div>
-            <div className='w-full line-clamp-1 overflow-hidden text-sm text-gray-500' alt={url}>
+            <div
+              className='line-clamp-1 w-full overflow-hidden text-sm text-gray-500'
+              alt={url}
+            >
               {url}
             </div>
           </div>
@@ -62,7 +68,7 @@ const Tag = ({ shortKey, url, displayDate }: TagProps) => {
             rel='noopener noreferrer'
             className='flex items-center'
           >
-            <Svg size={30} src={openUrl} alt="Open the short link" />
+            <Svg size={30} src={openUrl} alt='Open the short link' />
           </a>
         </div>
       </div>
