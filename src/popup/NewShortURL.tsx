@@ -5,7 +5,7 @@ import copySvg from '@src/assets/copy.svg';
 import flashSvg from '@src/assets/flash.svg';
 import successSvg from '@src/assets/success.svg';
 import { Svg } from '@src/components/Svg';
-import { copyToClipboard, get } from '@src/util';
+import { copyToClipboard, request } from '@src/util';
 import { useSettings } from '@src/util/useSettings';
 
 import QRModal from './QRModal';
@@ -127,7 +127,7 @@ export const NewShortURL = () => {
         <Svg
           src={flashSvg}
           onClick={() => {
-            get(`/api/link/ai?url=${url}`)
+            request(`/api/link/ai?url=${url}`)
               .then(data => {
                 data?.slug && setKey(data.slug);
               })

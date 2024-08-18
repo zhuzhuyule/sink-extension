@@ -1,12 +1,12 @@
 import { SETTING } from '@src/constant';
 import { useEffect, useState } from 'preact/hooks';
 
-export const get = async (api: string, options?: RequestInit) => {
+
+export const request = async (api: string, options?: RequestInit) => {
   const setting = (await chrome.storage.local.get([SETTING.KEY]))[SETTING.KEY];
   return fetch(
     `${setting[SETTING.INSTANCE_URL]}${api}`,
     Object.assign(options || {}, {
-      
       headers: {
         Authorization: `Bearer ${setting[SETTING.PASSWORD] || ''}`,
       },
@@ -19,7 +19,7 @@ export async function useAPI<T>(api: string, options?: object) {
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     setIsLoading(true);
-    get(api, options)
+    request(api, options)
       .then(res => res.json())
       .then(data => setData(data))
       .finally(() => {

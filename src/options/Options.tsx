@@ -2,7 +2,7 @@ import { Logo } from '@src/assets/img/logo';
 import webSvg from '@src/assets/web.svg';
 import { Footer } from '@src/components/Footer';
 import { SplitLine } from '@src/components/SplitLine';
-import { get } from '@src/util';
+import { request } from '@src/util';
 import { useSettings } from '@src/util/useSettings';
 import { useEffect, useState } from 'preact/hooks';
 import { JumpLink } from '../components/JumpLink';
@@ -41,7 +41,7 @@ const Options = () => {
   };
 
   const queryLinks = () => {
-    get('/api/link/list?limit=100&cursor')
+    request('/api/link/list?limit=100&cursor')
       .then(data => {
         if (data.statusMessage) {
           throw Error();
