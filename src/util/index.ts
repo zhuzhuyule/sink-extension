@@ -2,6 +2,7 @@ import { SETTING } from '@src/constant';
 import { useEffect, useState } from 'preact/hooks';
 
 const DEBOUNCE_KEY: Record<string, number> = {};
+const THROTTLE_KEY: Record<string, number> = {};
 
 export const debounce = (
   key: string,
@@ -16,18 +17,35 @@ export const debounce = (
   };
 };
 
+export const throttle = (
+  cb: (...param: any) => void,
+  duration: number = 500
+) => {
+  let isWaiting = false;
+  let params: any;
+  return function (...args: any) {
+    if (!isWaiting) {
+      cb(...args);
+    } else {
+      params = args;
+      isWaiting = true;
+      setTimeout(() => {
+        cb(...params);
+        isWaiting = false;
+      }, duration);
+    }
+  };
+};
+
 export const request = async (api: string, options?: RequestInit) => {
   const setting = (await chrome.storage.local.get([SETTING.KEY]))[SETTING.KEY];
-  return fetch(
-    `${setting[SETTING.INSTANCE_URL]}${api}`,
-    {
-      ...options,
-      headers: {
-        ...options?.headers,
-        Authorization: `Bearer ${setting[SETTING.PASSWORD] || ''}`,
-      }
-    }
-  ).then(res => res.json());
+  return fetch(`${setting[SETTING.INSTANCE_URL]}${api}`, {
+    ...options,
+    headers: {
+      ...options?.headers,
+      Authorization: `Bearer ${setting[SETTING.PASSWORD] || ''}`,
+    },
+  }).then(res => res.json());
 };
 
 export async function useAPI<T>(api: string, options?: object) {
