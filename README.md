@@ -11,6 +11,17 @@
 * 预览缩短后的链接，并提供快速复制功能。
 * 支持登录 Sink 账户，管理已生成的短链接。
 
+### ☀️ 截屏
+
+#### Popup Page
+[!popup Page](./doc/popup.png)
+
+#### QRCode Page
+[!QRCode Page](./doc/QRCode.png)
+
+#### Setting Page
+[!option Page](./doc/option.png)
+
 ### 🚀 使用方法
 
 1. 安装 Sink 服务：参考 [https://github.com/ccbikai/Sink](https://github.com/ccbikai/Sink)
