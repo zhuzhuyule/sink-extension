@@ -35,9 +35,9 @@ const Tag = ({ shortKey, url, displayDate }: TagProps) => {
           <span className='text-foreground bg-secondary inline-flex h-10 w-10 shrink-0 select-none items-center justify-center overflow-hidden rounded-full text-xs font-normal'>
             <Svg class="rounded-full overflow-hidden" src={avatarUrl} alt={shortKey} />
           </span>
-          <div className='max-w-[250px] flex-1 overflow-hidden'>
+          <div className='w-[250px] flex-1 overflow-hidden'>
             <div className='flex items-center'>
-              <div className='text-md mr-2 truncate font-bold leading-5'>
+              <div className='text-lg mr-1 truncate font-bold leading-5'>
                 {shortKey}
               </div>
               {copied ? (
@@ -51,9 +51,9 @@ const Tag = ({ shortKey, url, displayDate }: TagProps) => {
                 />
               )}
             </div>
-            <p className='line-clamp-1 overflow-hidden text-sm text-gray-500'>
+            <div className='w-full line-clamp-1 overflow-hidden text-sm text-gray-500' al={url}>
               {url}
-            </p>
+            </div>
           </div>
           <a
             href={url}
@@ -61,7 +61,7 @@ const Tag = ({ shortKey, url, displayDate }: TagProps) => {
             rel='noopener noreferrer'
             className='flex items-center'
           >
-            <Svg size={40} src={openUrl} />
+            <Svg size={30} src={openUrl} />
           </a>
         </div>
       </div>
