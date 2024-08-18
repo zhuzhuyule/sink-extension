@@ -1,4 +1,5 @@
 import openUrl from '@src/assets/openUrl.svg';
+import { Svg } from '@src/components/Svg';
 export const JumpLink = ({ link }: { link?: string }) => {
   return link ? (
     <a
@@ -7,7 +8,7 @@ export const JumpLink = ({ link }: { link?: string }) => {
       target='_blank'
     >
       <span class='mr-1'>Go to my Skin</span>
-      <img src={openUrl} />
+      <Svg src={openUrl} />
     </a>
   ) : null;
 };

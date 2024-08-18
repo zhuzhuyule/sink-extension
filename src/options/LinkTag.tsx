@@ -4,8 +4,10 @@ import { h } from 'preact';
 import { useState } from 'preact/hooks';
 
 import copySvg from '@src/assets/copy.svg';
+import success from '@src/assets/success.svg';
 import openUrl from '@src/assets/openUrl.svg';
 import { useSettings } from '@src/util/useSettings';
+import { Svg } from '@src/components/Svg';
 
 interface TagProps {
   shortKey: string;
@@ -27,28 +29,25 @@ const Tag = ({ shortKey, url, displayDate }: TagProps) => {
   const avatarUrl = useAvatar(url);
 
   return (
-    <div className='bg-card text-card-foreground rounded-lg border shadow-sm mt-2'>
+    <div className='bg-card text-card-foreground mt-2 rounded-lg border shadow-sm'>
       <div className='flex flex-col space-y-3 p-4'>
         <div className='flex items-center justify-center space-x-3'>
           <span className='text-foreground bg-secondary inline-flex h-10 w-10 shrink-0 select-none items-center justify-center overflow-hidden rounded-full text-xs font-normal'>
-            <img
-              src={avatarUrl}
-              alt={shortKey}
-              className='h-full w-full object-cover'
-            />
+            <Svg class="rounded-full overflow-hidden" src={avatarUrl} alt={shortKey} />
           </span>
           <div className='max-w-[250px] flex-1 overflow-hidden'>
             <div className='flex items-center'>
-              <div className='text-md mr-4 truncate font-bold leading-5'>
+              <div className='text-md mr-2 truncate font-bold leading-5'>
                 {shortKey}
               </div>
               {copied ? (
-                'Copied'
+                <Svg src={success} size={20} className='ml-1 shrink-0' />
               ) : (
-                <img
+                <Svg
                   src={copySvg}
                   onClick={handleCopy}
-                  className='ml-1 h-4 w-4 shrink-0 cursor-pointer'
+                  size={20}
+                  className='ml-1 shrink-0 cursor-pointer'
                 />
               )}
             </div>
@@ -62,7 +61,7 @@ const Tag = ({ shortKey, url, displayDate }: TagProps) => {
             rel='noopener noreferrer'
             className='flex items-center'
           >
-            <img src={openUrl} />
+            <Svg size={40} src={openUrl} />
           </a>
         </div>
       </div>

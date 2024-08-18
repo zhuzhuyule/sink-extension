@@ -6,7 +6,7 @@ import { Logo } from '@src/assets/img/logo';
 import { SplitLine } from '@src/components/SplitLine';
 
 export default function Popup() {
-  const optionsUrl = chrome.runtime.getURL('options.html');
+  const optionsUrl = chrome.runtime.getURL('src/options/index.html');
 
   return (
     <div class='w-full min-w-[512px] px-4 pt-4'>
