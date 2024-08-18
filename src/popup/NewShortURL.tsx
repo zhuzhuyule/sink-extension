@@ -37,7 +37,11 @@ export const NewShortURL = () => {
     <div class='flex w-full flex-col items-center justify-center'>
       <div className='flex w-full items-center justify-center'>
         <span className='text-foreground bg-secondary inline-flex h-10 w-10 shrink-0 select-none items-center justify-center overflow-hidden rounded-full text-xs font-normal'>
-          <Svg src={avatarUrl} alt={key} class='object-cover shadow-md rounded-full overflow-hidden' />
+          <Svg
+            src={avatarUrl}
+            alt={key}
+            class='overflow-hidden rounded-full object-cover shadow-md'
+          />
         </span>
         <div className='flex flex-1 items-center justify-start overflow-hidden'>
           <div className='mr-[2px] truncate text-base font-bold leading-5'>
@@ -61,6 +65,7 @@ export const NewShortURL = () => {
               disabled
               onClick={handleCopy}
               className='ml-1 cursor-pointer'
+              alt='Copy the short link'
             />
           )}
         </div>
@@ -73,11 +78,10 @@ export const NewShortURL = () => {
           placeholder='https://example.com'
           className='flex-1 rounded-md border border-gray-300 px-2 py-1 text-gray-600 shadow-sm focus:border-gray-800 focus:outline-none focus:ring-gray-800 sm:text-sm'
         />
-        
       </div>
       <button
         // disabled={isLoging}
-        className={`w-full mt-2 self-end rounded-md border border-transparent bg-gray-800 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-900 focus:outline-none`}
+        className={`mt-2 w-full self-end rounded-md border border-transparent bg-gray-800 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-900 focus:outline-none`}
         // onClick={handleSubmit}
       >
         Add

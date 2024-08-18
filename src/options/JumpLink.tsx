@@ -7,8 +7,7 @@ export const JumpLink = ({ link }: { link?: string }) => {
       href={link}
       target='_blank'
     >
-      <span class='mr-1'>Go to my Skin</span>
-      <Svg src={openUrl} />
+      <Svg src={openUrl} alt="Go to my Skin"/>
     </a>
   ) : null;
 };

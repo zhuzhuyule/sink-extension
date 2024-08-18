@@ -27,13 +27,13 @@ export default function Popup() {
         <div class='mb-2 flex w-full items-center justify-between'>
           <div class='flex items-center justify-start gap-2'>
             <a href={optionsUrl} target='_blank'>
-              <Svg src={settingSvg} />
+              <Svg src={settingSvg} alt="Open the setting page" />
             </a>
-            <a href={instanceUrl} target='_blank'>
-              <Svg src={webSvg} />
+            <a href={instanceUrl} target='_blank' >
+              <Svg src={webSvg} alt="Go to my Skin" />
             </a>
             <a href={MY_GITHUB} target='_blank'>
-              <Svg src={githubSvg} />
+              <Svg src={githubSvg} alt="Go to Github" />
             </a>
           </div>
           <p className='text-right text-xs text-gray-500'>

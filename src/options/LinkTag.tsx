@@ -4,7 +4,7 @@ import { h } from 'preact';
 import { useState } from 'preact/hooks';
 
 import copySvg from '@src/assets/copy.svg';
-import success from '@src/assets/success.svg';
+import successSvg from '@src/assets/success.svg';
 import openUrl from '@src/assets/openUrl.svg';
 import { useSettings } from '@src/util/useSettings';
 import { Svg } from '@src/components/Svg';
@@ -41,17 +41,18 @@ const Tag = ({ shortKey, url, displayDate }: TagProps) => {
                 {shortKey}
               </div>
               {copied ? (
-                <Svg src={success} size={20} className='ml-1 shrink-0' />
+                <Svg src={successSvg} size={20} className='ml-1 shrink-0' />
               ) : (
                 <Svg
                   src={copySvg}
                   onClick={handleCopy}
                   size={20}
                   className='ml-1 shrink-0 cursor-pointer'
+                  alt="Copy short link"
                 />
               )}
             </div>
-            <div className='w-full line-clamp-1 overflow-hidden text-sm text-gray-500' al={url}>
+            <div className='w-full line-clamp-1 overflow-hidden text-sm text-gray-500' alt={url}>
               {url}
             </div>
           </div>
@@ -61,7 +62,7 @@ const Tag = ({ shortKey, url, displayDate }: TagProps) => {
             rel='noopener noreferrer'
             className='flex items-center'
           >
-            <Svg size={30} src={openUrl} />
+            <Svg size={30} src={openUrl} alt="Open the short link" />
           </a>
         </div>
       </div>
