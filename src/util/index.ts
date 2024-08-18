@@ -1,11 +1,12 @@
 import { SETTING } from '@src/constant';
 import { useEffect, useState } from 'preact/hooks';
 
-export const get = async (api: string, options?: object) => {
+export const get = async (api: string, options?: RequestInit) => {
   const setting = (await chrome.storage.local.get([SETTING.KEY]))[SETTING.KEY];
   return fetch(
     `${setting[SETTING.INSTANCE_URL]}${api}`,
     Object.assign(options || {}, {
+      
       headers: {
         Authorization: `Bearer ${setting[SETTING.PASSWORD] || ''}`,
       },
