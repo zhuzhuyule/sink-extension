@@ -7,6 +7,7 @@ import openUrl from '@src/assets/openUrl.svg';
 import successSvg from '@src/assets/success.svg';
 import { Svg } from '@src/components/Svg';
 import { useSettings } from '@src/util/useSettings';
+import { JumpLink } from '../components/JumpLink';
 
 interface TagProps {
   shortKey: string;
@@ -62,14 +63,7 @@ const Tag = ({ shortKey, url, displayDate }: TagProps) => {
               {url}
             </div>
           </div>
-          <a
-            href={url}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='flex items-center'
-          >
-            <Svg size={30} src={openUrl} alt='Open the short link' />
-          </a>
+          <JumpLink link={url} />
         </div>
       </div>
     </div>

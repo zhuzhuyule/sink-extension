@@ -4,7 +4,7 @@ import { get } from '@src/util';
 import { useSettings } from '@src/util/useSettings';
 import { useEffect, useState } from 'preact/hooks';
 import { FormError } from './FormError';
-import { JumpLink } from './JumpLink';
+import { JumpLink } from '../components/JumpLink';
 import LinkTag from './LinkTag';
 
 const URL_REG =
@@ -39,7 +39,7 @@ const Options = () => {
   };
 
   const queryLinks = () => {
-    get('/api/link/list?limit=30&cursor')
+    get('/api/link/list?limit=100&cursor')
       .then(data => {
         if (data.statusMessage) {
           throw Error();
@@ -81,7 +81,7 @@ const Options = () => {
               className='flex justify-between text-sm font-medium text-gray-700'
             >
               Instance URL*
-              <JumpLink link={links ? instanceUrl : ''} />
+              <JumpLink link={links ? `${instanceUrl}/dashboard/links` : ''} alt='Go to my Skin' />
             </label>
             <input
               id='username'

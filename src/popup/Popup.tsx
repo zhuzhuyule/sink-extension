@@ -7,6 +7,7 @@ import { Logo } from '@src/assets/img/logo';
 import { SplitLine } from '@src/components/SplitLine';
 import { useSettings } from '@src/util/useSettings';
 import { MY_GITHUB } from '@src/constant';
+import { JumpLink } from '@src/components/JumpLink';
 
 export default function Popup() {
   const optionsUrl = chrome.runtime.getURL('src/options/index.html');
@@ -24,15 +25,9 @@ export default function Popup() {
         </div>
         <div class='mt-5 mb-2 flex w-full items-center justify-between'>
           <div class='flex items-center justify-start gap-2'>
-            <a href={optionsUrl} target='_blank'>
-              <Svg src={settingSvg} alt="Open the setting page" />
-            </a>
-            <a href={instanceUrl} target='_blank' >
-              <Svg src={webSvg} alt="Go to my Skin" />
-            </a>
-            <a href={MY_GITHUB} target='_blank'>
-              <Svg src={githubSvg} alt="Go to Github" />
-            </a>
+            <JumpLink link={optionsUrl} svg={settingSvg} alt='Open the setting page' />
+            <JumpLink link={instanceUrl} svg={webSvg} alt='Go to my Skin' />
+            <JumpLink link={MY_GITHUB} svg={githubSvg} alt='Go to Github' />
           </div>
           <p className='text-right text-xs text-gray-500'>
             Create by{' '}
