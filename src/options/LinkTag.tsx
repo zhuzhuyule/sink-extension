@@ -4,7 +4,7 @@ import { h } from 'preact';
 import { useState } from 'preact/hooks';
 
 import copySvg from '@src/assets/copy.svg';
-import linkSvg from '@src/assets/link.svg';
+import openUrl from '@src/assets/openUrl.svg';
 import { useSettings } from '@src/util/useSettings';
 
 interface TagProps {
@@ -62,7 +62,7 @@ const Tag = ({ shortKey, url, displayDate }: TagProps) => {
             rel='noopener noreferrer'
             className='flex items-center'
           >
-            <img src={linkSvg} />
+            <img src={openUrl} />
           </a>
         </div>
       </div>
