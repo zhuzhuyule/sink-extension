@@ -1,34 +1,33 @@
-import { h } from 'preact';
-
-import refreshSvg from '@src/assets/refresh.svg';
-import addSvg from '@src/assets/add.svg';
-import settingSvg from '@src/assets/setting.svg';
 import githubSvg from '@src/assets/github.svg';
-import { Logo } from '@src/assets/img/logo';
-import { NewShortURL } from './NewShortURL';
+import settingSvg from '@src/assets/setting.svg';
 import { Svg } from '@src/components/Svg';
+import { NewShortURL } from './NewShortURL';
+import { Logo } from '@src/assets/img/logo';
+import { SplitLine } from '@src/components/SplitLine';
 
 export default function Popup() {
+  const optionsUrl = chrome.runtime.getURL('options.html');
+
   return (
     <div class='w-full min-w-[512px] px-4 pt-4'>
-      <div class='mt-4 w-full'>
+      <div class='flex items-center justify-center text-lg'>
+        <Logo size={30} />
+        <h2 class='ml-2 font-bold'>Skin</h2>
+      </div>
+      <SplitLine />
+      <div class='w-full'>
         <div class='flex w-full flex-col items-center justify-center'>
           <NewShortURL />
-          <p>No shortcut found.</p>
         </div>
         <hr class='MuiDivider-root MuiDivider-horizontal css-w2e6ki !mb-2 !mt-4 opacity-40' />
         <div class='mb-2 flex w-full flex-row items-center justify-between'>
           <div class='flex flex-row items-center justify-start'>
-            <button
-              class='MuiIconButton-root MuiIconButton-variantPlain MuiIconButton-colorNeutral MuiIconButton-sizeSm css-13t3rmv'
-              type='button'
-            >
+            <a href={optionsUrl} target='_blank'>
               <Svg src={settingSvg} />
-            </button>
+            </a>
             <a
-              href='https://github.com/yourselfhosted/slash'
+              href='https://github.com/zhuzhuyule/skin-extension'
               target='_blank'
-              class='MuiIconButton-root MuiIconButton-variantPlain MuiIconButton-colorNeutral MuiIconButton-sizeSm css-13t3rmv'
             >
               <Svg src={githubSvg} />
             </a>
