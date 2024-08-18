@@ -124,10 +124,10 @@ const Options = () => {
             zhuzhuyule
           </a>
         </p>
+        <div>
+      {links?.map(link => <LinkTag key={link.id} shortKey={link.slug} url={link.url} />)}
       </div>
-      <div>
-        {links?.map(link => <LinkTag key={link.id} shortKey={link.slug} url={link.url} />)}
-      </div>
+      </div>     
     </div>
   );
 };
