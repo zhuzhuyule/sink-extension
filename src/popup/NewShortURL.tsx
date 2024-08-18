@@ -1,6 +1,7 @@
 import { useAvatar } from '@src/util/useAvatar';
 import { useEffect, useState } from 'preact/hooks';
 
+import successSvg from '@src/assets/success.svg';
 import copySvg from '@src/assets/copy.svg';
 import openUrlSvg from '@src/assets/openUrl.svg';
 import { copyToClipboard } from '@src/util';
@@ -34,11 +35,11 @@ export const NewShortURL = () => {
 
   return (
     <div class='flex w-full flex-col items-center justify-center'>
-      <div className='flex w-full items-center justify-center space-x-3'>
+      <div className='flex w-full items-center justify-center'>
         <span className='text-foreground bg-secondary inline-flex h-10 w-10 shrink-0 select-none items-center justify-center overflow-hidden rounded-full text-xs font-normal'>
           <Svg src={avatarUrl} alt={key} class='object-cover' />
         </span>
-        <div className='flex flex-1 items-center justify-center overflow-hidden'>
+        <div className='flex flex-1 items-center justify-start overflow-hidden'>
           <div className='text-md mr-[2px] truncate font-bold leading-5'>
             {`${instanceUrl}/`}
           </div>
@@ -50,24 +51,20 @@ export const NewShortURL = () => {
             className='flex-1 rounded-md border border-gray-300 px-1 py-1 shadow-sm focus:border-gray-800 focus:outline-none focus:ring-gray-800 sm:text-sm'
           />
           {copied ? (
-            'Copied'
+            <Svg
+              src={successSvg}
+              className='ml-1 cursor-pointer text-green-500'
+            />
           ) : (
             <Svg
               src={copySvg}
+              disabled
               onClick={handleCopy}
               className='ml-1 cursor-pointer'
             />
           )}
-          <a href={url} target='_blank' rel='noopener noreferrer'>
-            <Svg
-              src={openUrlSvg}
-              className='ml-1 shrink-0'
-              // style={{ transform: 'scaleX(-1)' }}
-            />
-          </a>
         </div>
       </div>
-
       <div class='flex w-full items-center justify-center gap-2'>
         <div className='text-sm font-medium text-gray-700'>URL:</div>
         <input
@@ -75,7 +72,7 @@ export const NewShortURL = () => {
           value={url}
           onInput={e => setUrl(e.target?.value)}
           placeholder='https://example.com'
-          className='flex-1 rounded-md border border-gray-300 px-2 py-1 shadow-sm focus:border-gray-800 focus:outline-none focus:ring-gray-800 sm:text-sm'
+          className='flex-1 rounded-md border border-gray-300 px-2 py-1 text-gray-600 shadow-sm focus:border-gray-800 focus:outline-none focus:ring-gray-800 sm:text-sm'
         />
       </div>
       <p>No shortcut found.</p>
