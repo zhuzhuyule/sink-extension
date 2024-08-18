@@ -1,6 +1,6 @@
 export const SplitLine = ({
   className,
-  padding = 'px-2 py-4',
+  padding = 'py-4',
   ...props
 }: JSX.HTMLAttributes<HTMLDivElement> & {padding?: string}) => {
   return (

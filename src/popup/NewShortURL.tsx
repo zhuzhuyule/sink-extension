@@ -40,7 +40,7 @@ export const NewShortURL = () => {
           <Svg src={avatarUrl} alt={key} class='object-cover' />
         </span>
         <div className='flex flex-1 items-center justify-start overflow-hidden'>
-          <div className='text-md mr-[2px] truncate font-bold leading-5'>
+          <div className='mr-[2px] truncate text-base font-bold leading-5'>
             {`${instanceUrl}/`}
           </div>
           <input
@@ -48,7 +48,7 @@ export const NewShortURL = () => {
             value={key}
             onInput={e => setKey(e.target?.value)}
             placeholder='slug'
-            className='flex-1 rounded-md border border-gray-300 px-1 py-1 shadow-sm focus:border-gray-800 focus:outline-none focus:ring-gray-800 sm:text-sm'
+            className='flex-1 rounded-md border border-gray-300 px-1 py-1 text-base shadow-sm focus:border-gray-800 focus:outline-none focus:ring-gray-800'
           />
           {copied ? (
             <Svg
@@ -74,8 +74,15 @@ export const NewShortURL = () => {
           placeholder='https://example.com'
           className='flex-1 rounded-md border border-gray-300 px-2 py-1 text-gray-600 shadow-sm focus:border-gray-800 focus:outline-none focus:ring-gray-800 sm:text-sm'
         />
+        
       </div>
-      <p>No shortcut found.</p>
+      <button
+        // disabled={isLoging}
+        className={`w-full mt-2 self-end rounded-md border border-transparent bg-gray-800 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2`}
+        // onClick={handleSubmit}
+      >
+        Add
+      </button>
     </div>
   );
 };
