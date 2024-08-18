@@ -22,7 +22,7 @@ export default function QRModal({ text }: { text: string }) {
           onClick={closeModal}
         >
           <div
-            className='scale-100 transform rounded-lg bg-white p-6 shadow-lg transition-transform duration-300'
+            className='scale-100 transform rounded-lg bg-white p-4 shadow-lg transition-transform duration-300'
             onClick={e => e.stopPropagation()}
           >
             <button
