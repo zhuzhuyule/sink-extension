@@ -16,9 +16,6 @@ const manifest: ManifestType = {
     'storage',
     'tabs',
   ],
-  chrome_url_overrides: {
-    newtab: 'src/newtab/index.html',
-  },
   icons: {
     '128': 'icon-128.png',
   },
@@ -28,7 +25,6 @@ const manifest: ManifestType = {
       js: ['src/content/index.js'],
     },
   ],
-  devtools_page: 'src/devtools/index.html',
   web_accessible_resources: [
     {
       resources: ['icon-128.png', 'icon-34.png'],
