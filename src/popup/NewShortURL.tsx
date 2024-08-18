@@ -53,7 +53,7 @@ export const NewShortURL = () => {
             type='text'
             value={key}
             onInput={e => setKey(e.target?.value)}
-            placeholder='slug'
+            placeholder='[Short Key]'
             className='flex-1 border-b border-b-gray-200 p-0 text-base shadow-sm focus:border-gray-400 focus:outline-none focus:ring-gray-400'
           />
           {copied ? (
