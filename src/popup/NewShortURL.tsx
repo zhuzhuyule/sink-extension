@@ -1,12 +1,14 @@
 import { useAvatar } from '@src/util/useAvatar';
 import { useEffect, useState } from 'preact/hooks';
 
-import successSvg from '@src/assets/success.svg';
 import copySvg from '@src/assets/copy.svg';
-import openUrlSvg from '@src/assets/openUrl.svg';
+import successSvg from '@src/assets/success.svg';
+import { Svg } from '@src/components/Svg';
 import { copyToClipboard } from '@src/util';
 import { useSettings } from '@src/util/useSettings';
-import { Svg } from '@src/components/Svg';
+
+import QRCode from 'qrcode';
+import QRModal from './QRModal';
 
 export const NewShortURL = () => {
   const [url, setUrl] = useState('');
@@ -28,7 +30,7 @@ export const NewShortURL = () => {
 
   const handleCopy = () => {
     setCopied(true);
-    copyToClipboard(`${url}/${key}`, () => {
+    copyToClipboard(`${instanceUrl}/${key}`, () => {
       setTimeout(() => setCopied(false), 2000);
     });
   };
@@ -68,16 +70,18 @@ export const NewShortURL = () => {
               alt='Copy the short link'
             />
           )}
+          <QRModal text={`${instanceUrl}/${key}`}/>
         </div>
       </div>
-      <div class='flex w-full items-center justify-center gap-2'>
+      <div class='mt-1 flex w-full items-center justify-center gap-2'>
         <input
           type='text'
           value={url}
           onInput={e => setUrl(e.target?.value)}
           placeholder='https://example.com'
-          className='flex-1 px-1 border-b border-b-gray-200 p-0 text-base shadow-sm focus:border-gray-400 focus:outline-none focus:ring-gray-400'
+          className='flex-1 border-b border-b-gray-200 p-0 px-1 text-base shadow-sm focus:border-gray-400 focus:outline-none focus:ring-gray-400'
         />
+        <QRModal text={url} />
       </div>
       <button
         // disabled={isLoging}

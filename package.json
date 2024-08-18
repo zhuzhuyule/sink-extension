@@ -27,6 +27,7 @@
     "@types/chrome": "^0.0.270",
     "@types/jest": "^29.5.12",
     "@types/node": "^22.4.0",
+    "@types/qrcode": "^1.5.5",
     "@typescript-eslint/eslint-plugin": "^8.1.0",
     "@typescript-eslint/parser": "^8.1.0",
     "autoprefixer": "^10.4.20",
