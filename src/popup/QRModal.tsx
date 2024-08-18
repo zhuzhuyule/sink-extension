@@ -1,6 +1,6 @@
 import { Svg } from '@src/components/Svg';
 import { h } from 'preact';
-import { useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import qrcodeSvg from '@src/assets/qrcode.svg';
 import { QRImage } from './QRImage';
 

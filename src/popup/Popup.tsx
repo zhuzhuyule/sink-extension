@@ -22,8 +22,7 @@ export default function Popup() {
         <div class='flex w-full flex-col items-center justify-center'>
           <NewShortURL />
         </div>
-        <SplitLine />
-        <div class='mb-2 flex w-full items-center justify-between'>
+        <div class='mt-5 mb-2 flex w-full items-center justify-between'>
           <div class='flex items-center justify-start gap-2'>
             <a href={optionsUrl} target='_blank'>
               <Svg src={settingSvg} alt="Open the setting page" />
