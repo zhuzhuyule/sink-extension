@@ -6,7 +6,7 @@ export const LoadingIcon = ({size = 25, ...props}: JSX.HTMLAttributes<HTMLDivEle
     <div
       {...props}
       alt='Loading'
-      class={`${props.class || props.className || ''}  animate-spin inline-block`}
+      className={`${props.class || props.className || ''}  animate-spin inline-block`}
     >
       <LoadingSvg style={{ height: size + 'px', width: size + 'px'}}/>
     </div>

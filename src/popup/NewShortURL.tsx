@@ -1,9 +1,9 @@
 import { useAvatar } from '@src/util/useAvatar';
 import { useEffect, useLayoutEffect, useState } from 'preact/hooks';
 
-import copySvg from '@src/assets/copy.svg';
-import flashSvg from '@src/assets/flash.svg';
-import successSvg from '@src/assets/success.svg';
+import CopySvg from '@src/assets/copy.svg?react';
+import FlashSvg from '@src/assets/flash.svg?react';
+import SuccessSvg from '@src/assets/success.svg?react';
 import { Svg } from '@src/components/Svg';
 import { copyToClipboard, debounce, request } from '@src/util';
 import { useSettings } from '@src/util/useSettings';
@@ -91,14 +91,14 @@ export const NewShortURL = () => {
   };
 
   return (
-    <div class='flex w-full flex-col items-center justify-center'>
+    <div className='flex w-full flex-col items-center justify-center'>
       <div className='flex w-full items-center justify-center'>
         <Svg
           src={avatarUrl}
           alt={key}
-          class='mr-2 h-10 w-10 select-none overflow-hidden rounded-full object-cover shadow-lg'
+          className='mr-2 h-10 w-10 select-none overflow-hidden rounded-full object-cover shadow-lg'
         />
-        <div class='flex-1'>
+        <div className='flex-1'>
           <div className='flex items-center justify-start overflow-hidden'>
             <div className='mr-[2px] truncate text-base font-bold leading-5'>
               {`${instanceUrl}/`}
@@ -110,17 +110,12 @@ export const NewShortURL = () => {
               placeholder='[Short Key]'
               className='flex-1 border-b border-b-gray-200 p-0 text-base shadow-sm focus:border-gray-400 focus:outline-none focus:ring-gray-400'
             />
-            {copied ? (
-              <Svg
-                src={successSvg}
-                className='ml-1 cursor-pointer text-green-500'
-              />
+            {!copied ? (
+              <SuccessSvg className='ml-1 h-6 w-6 cursor-pointer text-green-500' />
             ) : (
-              <Svg
-                src={copySvg}
-                disabled
+              <CopySvg
                 onClick={handleCopy}
-                className='ml-1 cursor-pointer'
+                className='ml-1 h-6 w-6 cursor-pointer'
                 alt='Copy the short link'
               />
             )}
@@ -129,7 +124,7 @@ export const NewShortURL = () => {
           <FormError error={errors.key} />
         </div>
       </div>
-      <div class='mt-1 flex w-full items-center justify-center'>
+      <div className='mt-1 flex w-full items-center justify-center'>
         <input
           type='text'
           value={url}
@@ -137,8 +132,7 @@ export const NewShortURL = () => {
           placeholder='https://example.com'
           className='flex-1 border-b border-b-gray-200 p-0 px-1 text-base text-gray-400 shadow-sm focus:border-gray-400 focus:text-gray-700 focus:outline-none focus:ring-gray-400'
         />
-        <Svg
-          src={flashSvg}
+        <FlashSvg
           onClick={() => {
             debounce(
               'slug-request',
@@ -152,17 +146,17 @@ export const NewShortURL = () => {
               2000
             )();
           }}
-          className='ml-1 cursor-pointer'
+          className='ml-1 h-6 w-6 cursor-pointer'
           alt='Quick generate slug'
         />
         <QRModal text={url} />
       </div>
-      <div class='self-start'>
+      <div className='self-start'>
         <FormError error={errors.url} />
         <FormError error={errors.login} />
       </div>
       <Button
-        class='mt-3 w-full'
+        className='mt-3 w-full'
         loading={isLoging}
         onClick={e => handleSubmit(e)}
       >

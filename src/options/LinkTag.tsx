@@ -33,7 +33,7 @@ const Tag = ({ shortKey, url, displayDate }: TagProps) => {
         <div className='flex items-center justify-center space-x-3'>
           <span className='text-foreground bg-secondary inline-flex h-10 w-10 shrink-0 select-none items-center justify-center overflow-hidden rounded-full text-xs font-normal'>
             <Svg
-              class='overflow-hidden rounded-full'
+              className='overflow-hidden rounded-full'
               src={avatarUrl}
               alt={shortKey}
             />

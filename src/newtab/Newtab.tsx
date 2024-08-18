@@ -2,12 +2,12 @@ import { Logo } from '@src/assets/img/logo';
 
 const Newtab = () => {
   return (
-    <div class='flex h-screen flex-1 flex-col justify-center bg-[#673ab8] p-8 text-center text-lg'>
+    <div className='flex h-screen flex-1 flex-col justify-center bg-[#673ab8] p-8 text-center text-lg'>
       <Logo />
-      <p class='text-white'>Hello Vite + Preact!</p>
-      <p class='text-white'>
+      <p className='text-white'>Hello Vite + Preact!</p>
+      <p className='text-white'>
         <a
-          class='border-b-2'
+          className='border-b-2'
           href='https://preactjs.com/'
           target='_blank'
           rel='noopener noreferrer'
@@ -15,7 +15,7 @@ const Newtab = () => {
           Learn Preact
         </a>
       </p>
-      <p data-testid='newtab_text' class='p-6 text-3xl text-purple-400'>
+      <p data-testid='newtab_text' className='p-6 text-3xl text-purple-400'>
         New tab page
       </p>
     </div>

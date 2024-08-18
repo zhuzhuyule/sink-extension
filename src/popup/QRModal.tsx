@@ -21,15 +21,15 @@ export default function QRModal({ text }: { text: string }) {
 
       {isOpen && (
         <div
-          class='fixed inset-0 z-50 flex flex-col items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300'
+          className='fixed inset-0 z-50 flex flex-col items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300'
           onClick={closeModal}
         >
           <div
-            class='scale-100 transform rounded-lg bg-white p-6 shadow-lg transition-transform duration-300'
+            className='scale-100 transform rounded-lg bg-white p-6 shadow-lg transition-transform duration-300'
             onClick={e => e.stopPropagation()}
           >
             <button
-              class='absolute right-2 top-2 text-gray-500 transition-all hover:text-gray-700'
+              className='absolute right-2 top-2 text-gray-500 transition-all hover:text-gray-700'
               onClick={closeModal}
             >
               ✖

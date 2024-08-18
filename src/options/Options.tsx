@@ -129,7 +129,7 @@ const Options = () => {
         <Footer hideSetting hideWeb />
         <SplitLine />
         {links ? '' : 'Not logged in yet'}
-        <div class=''>
+        <div className=''>
           {links?.map(link => (
             <LinkTag key={link.id} shortKey={link.slug} url={link.url} />
           ))}

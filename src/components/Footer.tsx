@@ -20,8 +20,8 @@ export const Footer = ({
   const optionsUrl = chrome.runtime.getURL('src/options/index.html');
   const { instanceUrl } = useSettings();
   return (
-    <div class='mb-2 mt-5 flex w-full items-center justify-between'>
-      <div class='flex items-center justify-start gap-2'>
+    <div className='mb-2 mt-5 flex w-full items-center justify-between'>
+      <div className='flex items-center justify-start gap-2'>
         {!hideSetting && (
           <JumpLink
             link={optionsUrl}
