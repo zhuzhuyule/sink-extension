@@ -1,11 +1,11 @@
 import { useAvatar } from '@src/util/useAvatar';
-import { useEffect, useLayoutEffect, useMemo, useState } from 'preact/hooks';
+import { useEffect, useLayoutEffect, useState } from 'preact/hooks';
 
 import CopySvg from '@src/assets/copy.svg?react';
 import FlashSvg from '@src/assets/flash.svg?react';
 import SuccessSvg from '@src/assets/success.svg?react';
 import { Svg } from '@src/components/Svg';
-import { copyToClipboard, debounce, request, throttle } from '@src/util';
+import { copyToClipboard, debounce, request } from '@src/util';
 import { useSettings } from '@src/util/useSettings';
 
 import { Button } from '@src/components/Button';
@@ -13,9 +13,14 @@ import { LoadingIcon } from '@src/components/LoadingIcon';
 import { FormError } from '@src/options/FormError';
 import { ILink } from '@src/util/useLinks';
 import QRModal from './QRModal';
-import { link } from 'fs';
 
-export const NewShortURL = ({ links }: { links: ILink[] }) => {
+export const NewShortURL = ({
+  links,
+  refetch,
+}: {
+  links: ILink[];
+  refetch: () => Promise<void>;
+}) => {
   const [editLink, setEditLink] = useState<ILink | null>();
   const [isLoging, setIsLoging] = useState(false);
   const [isLoadSlug, setIsLoadSlug] = useState(false);
@@ -28,8 +33,12 @@ export const NewShortURL = ({ links }: { links: ILink[] }) => {
     url?: string;
     login?: string;
   }>({});
+  const isEdit = editLink?.slug === key;
+  const avatarUrl = useAvatar(url);
 
-  const warning = links.find(link => link.url === url && url !== editLink?.url);
+  const warning = links.filter(
+    link => link.url === url && url !== editLink?.url
+  );
 
   useLayoutEffect(() => {
     setErrors({});
@@ -40,15 +49,13 @@ export const NewShortURL = ({ links }: { links: ILink[] }) => {
       if (tab?.url) {
         try {
           setUrl(tab.url);
-          const item = links.find(link => link.url === tab.url);
-          setEditLink(item);
-          item && setKey(item.slug);
+          const theLink = links.find(link => link.url === tab.url);
+          setEditLink(theLink);
+          theLink && setKey(theLink.slug);
         } catch {}
       }
     });
   }, []);
-
-  const avatarUrl = useAvatar(url);
 
   const handleCopy = () => {
     setCopied(true);
@@ -62,35 +69,36 @@ export const NewShortURL = ({ links }: { links: ILink[] }) => {
   const validateForm = () => {
     const newErrors: { key?: string; url?: string } = {};
     if (!url) {
-      newErrors.url = 'Please input original url';
+      newErrors.url = 'Please input url';
     }
     if (!key) {
       newErrors.key = 'Please input short key';
-    } else if (links.some(link => link.slug === key)) {
+    } else if (!isEdit && links.some(link => link.slug === key)) {
       newErrors.key = 'The slug has existed, please change it!';
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
   const handleSubmit = async (e: Event) => {
-    e.preventDefault();
     if (validateForm()) {
       setIsLoging(true);
       const link = {
         url,
         slug: key,
       };
-      request(editLink ? '/api/link/edit' : '/api/link/create', {
-        method: editLink ? 'PUT' : 'POST',
+      request(isEdit ? '/api/link/edit' : '/api/link/create', {
+        method: isEdit ? 'PUT' : 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(link),
       })
         .then(data => {
-          if (data.statusCode === 409) {
+          if (data?.statusCode === 409) {
             setErrors({ key: 'The slug key has been existed!' });
           }
+          setEditLink(link as ILink);
+          return refetch();
         })
         .catch()
         .finally(() => {
@@ -166,9 +174,10 @@ export const NewShortURL = ({ links }: { links: ILink[] }) => {
         <QRModal text={url} />
       </div>
       <div className='self-start'>
-        {warning ? (
+        {warning.length ? (
           <p className='mt-1 text-xs text-yellow-400'>
-            The url has been existed with '<b>{warning.slug}</b>'
+            The url has been existed with{' '}
+            <b>{warning.map(link => link.slug).join(',')}</b>
           </p>
         ) : null}
         <FormError error={errors.url} />
@@ -177,9 +186,10 @@ export const NewShortURL = ({ links }: { links: ILink[] }) => {
       <Button
         className='mt-3 w-full'
         loading={isLoging}
+        disabled={editLink?.slug === key && editLink.url === url}
         onClick={e => handleSubmit(e)}
       >
-        {editLink?.url == url ? 'Edit' : 'Add'}
+        {isEdit ? 'Edit' : 'Add'}
       </Button>
     </div>
   );

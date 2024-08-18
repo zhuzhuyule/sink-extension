@@ -45,7 +45,9 @@ export const request = async (api: string, options?: RequestInit) => {
       ...options?.headers,
       Authorization: `Bearer ${setting[SETTING.PASSWORD] || ''}`,
     },
-  }).then(res => res.json());
+  }).then(res => {
+    return res.json().catch(() => null);
+  });
 };
 
 export async function useAPI<T>(api: string, options?: object) {
@@ -54,7 +56,6 @@ export async function useAPI<T>(api: string, options?: object) {
   useEffect(() => {
     setIsLoading(true);
     request(api, options)
-      .then(res => res.json())
       .then(data => setData(data))
       .finally(() => {
         setIsLoading(false);

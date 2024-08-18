@@ -5,7 +5,7 @@ import { useLinks } from '@src/util/useLinks';
 import { LoadingIcon } from '@src/components/LoadingIcon';
 
 export default function Popup() {
-  const { links, isLoading } = useLinks(1000);
+  const { links, setLinks, queryLinks, isLoading } = useLinks(1000);
   return (
     <div className='w-full min-w-[450px] p-5 pb-1'>
       <div className='flex items-center justify-center text-lg'>
@@ -19,7 +19,22 @@ export default function Popup() {
           ) : (
             <>
               {links ? (
-                <NewShortURL links={links} />
+                <NewShortURL
+                  links={links}
+                  refetch={() => {
+                    return queryLinks(1000)
+                      .then(data => {
+                        if (data.statusMessage) {
+                          throw Error();
+                        }
+                        setLinks(data.links);
+                        return data;
+                      })
+                      .catch(() => {
+                        setLinks(undefined);
+                      });
+                  }}
+                />
               ) : (
                 'Please update the token in the options Page!'
               )}
