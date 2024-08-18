@@ -16,7 +16,7 @@ export default function Popup() {
           <NewShortURL />
         </div>
       </div>
-      <Footer />
+      <Footer hideGift hideGithub />
     </div>
   );
 }

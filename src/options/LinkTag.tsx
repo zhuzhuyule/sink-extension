@@ -3,7 +3,6 @@ import { useAvatar } from '@src/util/useAvatar';
 import { useState } from 'preact/hooks';
 
 import copySvg from '@src/assets/copy.svg';
-import openUrl from '@src/assets/openUrl.svg';
 import successSvg from '@src/assets/success.svg';
 import { Svg } from '@src/components/Svg';
 import { useSettings } from '@src/util/useSettings';

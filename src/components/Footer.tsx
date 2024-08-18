@@ -9,9 +9,13 @@ import { useSettings } from '@src/util/useSettings';
 export const Footer = ({
   hideSetting,
   hideWeb,
+  hideGithub,
+  hideGift,
 }: {
   hideSetting?: boolean;
   hideWeb?: boolean;
+  hideGift?: boolean;
+  hideGithub?: boolean;
 }) => {
   const optionsUrl = chrome.runtime.getURL('src/options/index.html');
   const { instanceUrl } = useSettings();
@@ -28,8 +32,12 @@ export const Footer = ({
         {!hideWeb && (
           <JumpLink link={instanceUrl} svg={webSvg} alt='Go to my Skin' />
         )}
-        <JumpLink link={MY_GITHUB} svg={githubSvg} alt='Go to Github' />
-        <JumpLink link={MY_GITHUB} svg={giftSvg} alt='Give a coffee' />
+        {!hideGithub && (
+          <JumpLink link={MY_GITHUB} svg={githubSvg} alt='Go to Github' />
+        )}
+        {!hideGift && (
+          <JumpLink link={MY_GITHUB} svg={giftSvg} alt='Give a coffee' />
+        )}
       </div>
       <p className='text-right text-xs text-gray-500'>
         Create by{' '}
