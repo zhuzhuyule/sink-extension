@@ -6,7 +6,7 @@ import CopySvg from '@src/assets/copy.svg?react';
 import SuccessSvg from '@src/assets/success.svg?react';
 import { Svg } from '@src/components/Svg';
 import { useSettings } from '@src/util/useSettings';
-import { JumpLink } from '../components/JumpLink';
+import { JumpLink } from '@src/components/JumpLink';
 
 interface TagProps {
   shortKey: string;

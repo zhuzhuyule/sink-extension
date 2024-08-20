@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'preact/hooks';
 import { request } from '.';
+import { useSetAtom } from 'jotai';
+import { settingModalAtom } from '@src/options/atom';
 
 export interface ILink {
   id: string;
@@ -10,6 +12,8 @@ export interface ILink {
 }
 
 export const useLinks = (count: number = 100) => {
+  const setLoaded = useSetAtom(settingModalAtom)
+
   const [links, setLinks] = useState<ILink[]>();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -20,6 +24,7 @@ export const useLinks = (count: number = 100) => {
           throw Error();
         }
         setLinks(data.links);
+        setLoaded(true)
         return data;
       })
       .catch(() => {

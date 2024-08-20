@@ -10,7 +10,7 @@ import { useSettings } from '@src/util/useSettings';
 
 import { Button } from '@src/components/Button';
 import { LoadingIcon } from '@src/components/LoadingIcon';
-import { FormError } from '@src/options/FormError';
+import { FormError } from '@src/options/components/FormError';
 import { ILink } from '@src/util/useLinks';
 import QRModal from './QRModal';
 
