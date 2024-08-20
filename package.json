@@ -91,6 +91,7 @@
     }
   },
   "dependencies": {
+    "jotai": "^2.9.3",
     "qrcode": "^1.5.4"
   }
 }
