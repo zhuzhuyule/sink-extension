@@ -76,7 +76,7 @@ const Options = () => {
               <JumpLink
                 link={links ? `${instanceUrl}/dashboard/links` : ''}
                 svg={webSvg}
-                alt='Go to my Skin'
+                alt='Go to my Sink'
               />
             </label>
             <input

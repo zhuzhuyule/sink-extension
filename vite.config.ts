@@ -6,7 +6,7 @@ import svgr from "vite-plugin-svgr";
 
 const src = resolve(__dirname, 'src');
 const assetsDir = resolve(src, 'assets');
-const outDir = resolve(__dirname, 'skin-tool');
+const outDir = resolve(__dirname, 'sink-tool');
 const publicDir = resolve(__dirname, 'public');
 
 export default defineConfig({

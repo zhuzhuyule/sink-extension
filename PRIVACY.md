@@ -14,4 +14,4 @@ Since we don't collect any information on you, we also cannot notify you of chan
 
 ## How can I ask questions about this policy?
 
-You can ask questions by filing an issue in the [issue tracker](https://github.com/zhuzhuyule/skin-extension/issues) on GitHub.
+You can ask questions by filing an issue in the [issue tracker](https://github.com/zhuzhuyule/sink-extension/issues) on GitHub.

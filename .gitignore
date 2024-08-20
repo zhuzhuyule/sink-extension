@@ -5,8 +5,8 @@
 /coverage
 
 # build
-/skin-tool
-skin-tool.pem
+/sink-tool
+sink-tool.pem
 
 # etc
 .DS_Store

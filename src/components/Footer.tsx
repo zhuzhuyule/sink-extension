@@ -30,7 +30,7 @@ export const Footer = ({
           />
         )}
         {!hideWeb && (
-          <JumpLink link={instanceUrl} svg={webSvg} alt='Go to my Skin' />
+          <JumpLink link={instanceUrl} svg={webSvg} alt='Go to my Sink' />
         )}
         {!hideGithub && (
           <JumpLink link={MY_GITHUB} svg={githubSvg} alt='Go to Github' />

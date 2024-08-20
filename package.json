@@ -1,11 +1,11 @@
 {
-  "name": "skin-extension",
+  "name": "sink-extension",
   "version": "0.0.0.1",
-  "description": "Chrome extension for your Skin.",
+  "description": "Chrome extension for your Sink.",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zhuzhuyule/skin-extension.git"
+    "url": "https://github.com/zhuzhuyule/sink-extension.git"
   },
   "scripts": {
     "build": "vite build",

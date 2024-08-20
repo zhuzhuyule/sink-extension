@@ -3,7 +3,7 @@ import { ManifestType } from '@src/manifest-type';
 
 const manifest: ManifestType = {
   manifest_version: 3,
-  name: 'Skin Tool',
+  name: 'Sink Tool',
   version: packageJson.version,
   description: packageJson.description,
   options_page: 'src/options/index.html',

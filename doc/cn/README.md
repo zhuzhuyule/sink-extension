@@ -48,4 +48,4 @@
 
 ### 📄 License
 
-Distributed under the [MIT License](https://github.com/zhuzhuyule/skin-extension/LICENSE).
+Distributed under the [MIT License](https://github.com/zhuzhuyule/sink-extension/LICENSE).
