@@ -2,7 +2,13 @@ import { SETTING } from '@src/constant';
 import { useEffect, useState } from 'preact/hooks';
 
 const DEBOUNCE_KEY: Record<string, number> = {};
-const THROTTLE_KEY: Record<string, number> = {};
+const THROTTLE_KEY: Record<
+  string,
+  {
+    isWaiting: boolean;
+    lastArgs: any;
+  }
+> = {};
 
 export const debounce = (
   key: string,
@@ -18,20 +24,29 @@ export const debounce = (
 };
 
 export const throttle = (
+  key: string,
   cb: (...param: any) => void,
   duration: number = 500
 ) => {
-  let isWaiting = false;
-  let params: any;
+  if (!THROTTLE_KEY[key]) {
+    THROTTLE_KEY[key] = {
+      isWaiting: false,
+      lastArgs: null,
+    };
+  }
+
   return function (...args: any) {
-    if (!isWaiting) {
-      cb(...args);
+    if (THROTTLE_KEY[key].isWaiting) {
+      THROTTLE_KEY[key].lastArgs = args;
     } else {
-      params = args;
-      isWaiting = true;
+      THROTTLE_KEY[key].isWaiting = true;
+      cb(...args);
       setTimeout(() => {
-        cb(...params);
-        isWaiting = false;
+        if (THROTTLE_KEY[key].lastArgs) {
+          cb(...THROTTLE_KEY[key].lastArgs);
+        }
+        THROTTLE_KEY[key].isWaiting = false;
+        THROTTLE_KEY[key].lastArgs = null;
       }, duration);
     }
   };
