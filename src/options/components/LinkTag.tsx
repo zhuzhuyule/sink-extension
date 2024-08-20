@@ -14,7 +14,7 @@ interface TagProps {
   displayDate?: string;
 }
 
-const Tag = ({ shortKey, url, displayDate }: TagProps) => {
+const Tag = ({ shortKey, url }: TagProps) => {
   const [copied, setCopied] = useState(false);
   const { instanceUrl } = useSettings();
 
@@ -28,7 +28,7 @@ const Tag = ({ shortKey, url, displayDate }: TagProps) => {
   const avatarUrl = useAvatar(url);
 
   return (
-    <div className='bg-card text-card-foreground mt-2 rounded-lg border shadow-sm'>
+    <div className='bg-white mt-2 rounded-lg border shadow-lg'>
       <div className='flex flex-col space-y-3 p-4'>
         <div className='flex items-center justify-center space-x-3'>
           <span className='text-foreground bg-secondary inline-flex h-10 w-10 shrink-0 select-none items-center justify-center overflow-hidden rounded-full text-xs font-normal'>

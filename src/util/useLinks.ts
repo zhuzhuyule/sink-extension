@@ -1,20 +1,13 @@
 import { useEffect, useState } from 'preact/hooks';
 import { request } from '.';
-import { useSetAtom } from 'jotai';
-import { settingModalAtom } from '@src/options/atom';
+import { useAtom, useSetAtom } from 'jotai';
+import { linksAtom, settingModalAtom } from './atom';
 
-export interface ILink {
-  id: string;
-  url: string;
-  slug: string;
-  createdAt: number;
-  updatedAt: number;
-}
 
 export const useLinks = (count: number = 100) => {
   const setLoaded = useSetAtom(settingModalAtom)
 
-  const [links, setLinks] = useState<ILink[]>();
+  const [links, setLinks] = useAtom(linksAtom);
   const [isLoading, setIsLoading] = useState(false);
 
   const queryLinks = (count = 100, error?: () => void) =>
