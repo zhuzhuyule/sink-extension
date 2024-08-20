@@ -13,7 +13,7 @@ const Options = () => {
   const links = useAtomValue(linksAtom);
 
   return (
-    <div className='flex h-screen w-screen overflow-y-auto bg-gray-100 p-8'>
+    <div className='flex h-screen w-screen overflow-y-auto bg-gray-100 p-8 justify-center'>
       <Modal
         isOpen={!isHidden}
         onClose={() => links && setHidden(true)}
@@ -23,7 +23,7 @@ const Options = () => {
       >
         <LoginForm />
       </Modal>
-      <div className='m-5 flex flex-1 flex-col'>
+      <div className='m-5 flex flex-1 flex-col max-w-7xl'>
         <h2 className='flex items-center justify-start gap-4 text-center text-2xl font-bold'>
           <Logo />
           Links
