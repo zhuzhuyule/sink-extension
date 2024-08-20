@@ -6,6 +6,7 @@ import { SplitLine } from '@src/components/SplitLine';
 import { useAtom, useAtomValue } from 'jotai';
 import { linksAtom, optionLoginModalAtom } from '../../util/atom';
 import { Links } from './Links';
+import { Modal } from '@src/components/Modal';
 
 const Options = () => {
   const [isHidden, setHidden] = useAtom(optionLoginModalAtom);
@@ -13,13 +14,15 @@ const Options = () => {
 
   return (
     <div className='flex h-screen w-screen overflow-y-auto bg-gray-100 p-8'>
-      <div
-        className={`fixed left-[50vw] top-[50vh] -translate-x-1/2 -translate-y-1/2 transform transition-all duration-300 ease-in-out ${
-          isHidden ? 'scale-0 opacity-0' : 'scale-100 opacity-100'
-        }`}
+      <Modal
+        isOpen={!isHidden}
+        onClose={() => links && setHidden(true)}
+        mask={false}
+        maskClosable={!!links}
+        showCloseButton={!!links}
       >
         <LoginForm />
-      </div>
+      </Modal>
       <div className='m-5 flex flex-1 flex-col'>
         <h2 className='flex items-center justify-start gap-4 text-center text-2xl font-bold'>
           <Logo />

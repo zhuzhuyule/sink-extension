@@ -57,7 +57,7 @@ export const LoginForm = () => {
   }, [instanceUrl, password]);
 
   return (
-    <div className='w-[450px] rounded-lg bg-white p-8 shadow-lg'>
+    <div className='w-[450px] rounded-lg bg-white p-8'>
       <Header title='Settings' />
       <div className='space-y-4'>
         <div>
