@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 
-export const settingModalAtom = atom(false);
+export const optionLoginModalAtom = atom(false);
 
 export interface ILink {
   id: string;
