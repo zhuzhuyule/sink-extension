@@ -3,6 +3,7 @@ import { NewShortURL } from './NewShortURL';
 import { Footer } from '@src/components/Footer';
 import { useLinks } from '@src/util/useLinks';
 import { LoadingIcon } from '@src/components/LoadingIcon';
+import { Links } from './Links';
 
 export default function Popup() {
   const { links, setLinks, queryLinks, isLoading } = useLinks(1000);
@@ -43,6 +44,7 @@ export default function Popup() {
         </div>
       </div>
       <Footer hideGift hideGithub />
+      <Links />
     </div>
   );
 }
