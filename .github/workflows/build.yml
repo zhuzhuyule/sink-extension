@@ -29,8 +29,8 @@ jobs:
       - name: Build project
         run: pnpm build
 
-      - name: Zip dist folder
-        run: zip -r sink-tool.zip dist
+      - name: Zip sink-tool folder
+        run: zip -r sink-tool.zip sink-tool
 
       - name: Create Release
         id: create_release
