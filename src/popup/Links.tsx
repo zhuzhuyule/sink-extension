@@ -58,10 +58,13 @@ export const Links = () => {
         .map(link => (
           <span
             key={link.id}
+            onDblClick={() => {
+              window.open(link.url, '_blank');
+            }}
             onClick={() => {
               copyToClipboard(`${instanceUrl}/${link.slug}`, () => {});
             }}
-            class='mb-2 mr-2 inline-block cursor-pointer rounded-full bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700 hover:bg-gray-300'
+            class='mb-2 mr-2 select-none inline-block cursor-pointer rounded-full bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700 hover:bg-gray-300'
           >
             {link.slug}
           </span>
