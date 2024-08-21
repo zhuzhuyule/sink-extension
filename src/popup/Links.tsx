@@ -9,12 +9,23 @@ export const Links = () => {
   const links = useAtomValue(linksAtom);
   const { instanceUrl } = useSettings();
   const [text, setText] = useState('');
+  const [sort, setSort] = useState('CREATE');
 
   if (!links) return null;
   return (
     <div>
       <SplitLine />
-      <div>
+      <div className='mb-3 flex items-center gap-2'>
+        <select
+          value={sort}
+          onChange={e => setSort(e.currentTarget.value)}
+          className='rounded-md border border-gray-300 px-1 py-1 shadow-sm focus:border-gray-800 focus:outline-none focus:ring-gray-800 sm:text-sm'
+        >
+          <option value='CREATE'>create date</option>
+          <option value='UPDATE'>update date</option>
+          <option value='SLUG'>slug</option>
+          <option value='SLUG_LENGTH'>slug length</option>
+        </select>
         <input
           type='text'
           placeholder='Filter by slug'
@@ -26,11 +37,24 @@ export const Links = () => {
               500
             )(e.currentTarget.value)
           }
-          className='mb-3 block w-full rounded-md border border-gray-300 px-1 py-1 shadow-sm focus:border-gray-800 focus:outline-none focus:ring-gray-800 sm:text-sm'
+          className='flex-1 rounded-md border border-gray-300 px-1 py-1 shadow-sm focus:border-gray-800 focus:outline-none focus:ring-gray-800 sm:text-sm'
         />
       </div>
       {links
         .filter(link => link.slug.includes(text))
+        .sort((link1, link2) => {
+          if (sort === 'UPDATE') {
+            return link1.updatedAt - link2.updatedAt;
+          } else if (sort === 'SLUG') {
+            return link1.slug.localeCompare(link2.slug);
+          } else if (sort === 'SLUG_LENGTH') {
+            return (
+              link1.slug.length - link2.slug.length ||
+              link1.slug.localeCompare(link2.slug)
+            );
+          }
+          return link1.createdAt - link2.createdAt;
+        })
         .map(link => (
           <span
             key={link.id}
