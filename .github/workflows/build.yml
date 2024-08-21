@@ -2,14 +2,13 @@ name: Build and Release
 
 on:
   push:
-    branches:
-      - action
+    tags:
+      - 'v*'
   workflow_dispatch:
     inputs:
       tag:
         description: 'Tag to release'
         required: true
-        default: 'v0.0.1'
 
 jobs:
   build-and-release:
@@ -23,12 +22,12 @@ jobs:
         with:
           version: 9
           run_install: false
-          
+
       - name: Get pnpm store directory
         shell: bash
         run: |
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-  
+
       - uses: actions/cache@v3
         name: Setup pnpm cache
         with:
@@ -39,18 +38,32 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
-          
+
       - name: Build project
         run: pnpm build
 
       - name: Zip sink-tool folder
         run: zip -r sink-tool.zip sink-tool
 
-      - name: Get tag name
-        id: get_tag_name
-        run: echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-
-      - uses: ncipollo/release-action@v1
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          artifacts: "sink-tool.zip"
-          
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./sink-tool.zip
+          asset_name: sink-tool.zip
+          asset_content_type: application/zip
