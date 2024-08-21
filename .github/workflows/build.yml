@@ -3,8 +3,13 @@ name: Build and Release
 on:
   push:
     branches:
-      - release
-  workflow_dispatch: 
+      - action
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to release'
+        required: true
+        default: 'v0.0.1'
 
 jobs:
   build-and-release:
