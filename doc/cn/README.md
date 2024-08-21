@@ -51,13 +51,20 @@ pnpm build
 ### ☀️ 截屏
 
 #### Popup Page
+
 ![popupPage](./doc/popup.png)
 
 #### QRCode Page
+
 ![QRCodePage](./doc/QRCode.png)
 
 #### Setting Page
+
 ![optionPage](./doc/option.png)
+
+#### Setting Page - Login
+
+![optionPage](./doc/login.png)
 
 ### 🚀 使用方法
 

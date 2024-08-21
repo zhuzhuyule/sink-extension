@@ -50,7 +50,6 @@ You can install the extension using the following steps:
 6. Select the root directory of the extension `sink-tool`.
 
 
-
 ### 📦 Installation
 
 1. Clone the repository: `git clone https://github.com/zhuzhuyule/sink-extension.git`
@@ -62,13 +61,20 @@ You can install the extension using the following steps:
 ### ☀️ Screenshots
 
 #### Popup Page
+
 ![popupPage](./doc/popup.png)
 
 #### QRCode Page
+
 ![QRCodePage](./doc/QRCode.png)
 
 #### Setting Page
+
 ![optionPage](./doc/option.png)
+
+#### Setting Page - Login
+
+![optionPage](./doc/login.png)
 
 ### 🚀 Usage
 
