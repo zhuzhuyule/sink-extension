@@ -15,19 +15,19 @@
 
 ### ☀️ 截屏
 
-#### Popup Page
+* Popup Page
 
 ![popupPage](../popup.png)
 
-#### QRCode Page
+* QRCode Page
 
 ![QRCodePage](../QRCode.png)
 
-#### Setting Page
+* Setting Page
 
 ![optionPage](../option.png)
 
-#### Setting Page - Login
+* Setting Page - Login
 
 ![optionPage](../login.png)
 

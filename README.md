@@ -14,19 +14,19 @@ This is a Chrome extension that allows for quick generation and preview of short
 
 ### ☀️ Screenshots
 
-#### Popup Page
+* Popup Page
 
 ![popupPage](./doc/popup.png)
 
-#### QRCode Page
+* QRCode Page
 
 ![QRCodePage](./doc/QRCode.png)
 
-#### Setting Page
+* Setting Page
 
 ![optionPage](./doc/option.png)
 
-#### Setting Page - Login
+* Setting Page - Login
 
 ![optionPage](./doc/login.png)
 
@@ -65,15 +65,6 @@ You can install the extension using the following steps:
 4. Enable Developer mode.
 5. Click the `Load unpacked extension` button.
 6. Select the root directory of the extension `sink-tool`.
-
-
-### 📦 Installation
-
-1. Clone the repository: `git clone https://github.com/zhuzhuyule/sink-extension.git`
-2. Navigate to the project directory: `cd sink-extension`
-3. Install dependencies: `pnpm install`
-4. Build the extension: `pnpm build`
-5. Load the extension into Chrome: `chrome://extensions/` > `Load unpacked` > select the project directory
 
 ### 🚀 Usage
 
