@@ -12,6 +12,23 @@ This is a Chrome extension that allows for quick generation and preview of short
 * Preview shortened links with quick copy functionality.
 * Log in to your Sink account to manage generated short links.
 
+### ☀️ Screenshots
+
+#### Popup Page
+
+![popupPage](./doc/popup.png)
+
+#### QRCode Page
+
+![QRCodePage](./doc/QRCode.png)
+
+#### Setting Page
+
+![optionPage](./doc/option.png)
+
+#### Setting Page - Login
+
+![optionPage](./doc/login.png)
 
 ### 🛠 Development and Debugging
 
@@ -57,24 +74,6 @@ You can install the extension using the following steps:
 3. Install dependencies: `pnpm install`
 4. Build the extension: `pnpm build`
 5. Load the extension into Chrome: `chrome://extensions/` > `Load unpacked` > select the project directory
-
-### ☀️ Screenshots
-
-#### Popup Page
-
-![popupPage](./doc/popup.png)
-
-#### QRCode Page
-
-![QRCodePage](./doc/QRCode.png)
-
-#### Setting Page
-
-![optionPage](./doc/option.png)
-
-#### Setting Page - Login
-
-![optionPage](./doc/login.png)
 
 ### 🚀 Usage
 

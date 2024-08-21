@@ -13,6 +13,24 @@
 * 支持登录 Sink 账户，管理已生成的短链接。
 
 
+### ☀️ 截屏
+
+#### Popup Page
+
+![popupPage](../popup.png)
+
+#### QRCode Page
+
+![QRCodePage](../QRCode.png)
+
+#### Setting Page
+
+![optionPage](../option.png)
+
+#### Setting Page - Login
+
+![optionPage](../login.png)
+
 ### 🛠 开发调试
 1. 克隆仓库到本地
 ```bash
@@ -47,24 +65,6 @@ pnpm build
 4. 打开开发者模式。
 5. 点击`加载已解压的扩展程序`按钮。
 6. 选择扩展程序的根目录`sink-tool` 。
-
-### ☀️ 截屏
-
-#### Popup Page
-
-![popupPage](./doc/popup.png)
-
-#### QRCode Page
-
-![QRCodePage](./doc/QRCode.png)
-
-#### Setting Page
-
-![optionPage](./doc/option.png)
-
-#### Setting Page - Login
-
-![optionPage](./doc/login.png)
 
 ### 🚀 使用方法
 
