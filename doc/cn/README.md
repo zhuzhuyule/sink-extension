@@ -12,6 +12,42 @@
 * 预览缩短后的链接，并提供快速复制功能。
 * 支持登录 Sink 账户，管理已生成的短链接。
 
+
+### 🛠 开发调试
+1. 克隆仓库到本地
+```bash
+git clone https://github.com/zhuzhuyule/sink-extension.git
+```
+2. 进入项目目录
+```bash
+cd sink-extension
+```
+3. 安装依赖
+```bash
+pnpm install
+```
+4. 启动开发服务器
+```bash
+pnpm dev
+# or
+pnpm build
+```
+5. 打开 Chrome 浏览器，进入扩展程序页面（chrome://extensions/）。
+6. 打开开发者模式。
+7. 点击`加载已解压的扩展程序`按钮。
+8. 选择扩展程序的根目录 `./sink-tool`。
+
+### 📦 手动安装
+
+您可以通过以下方式安装扩展程序：
+
+1. 下载 [sink-tool.zip](https://github.com/zhuzhuyule/sink-extension/releases/) 文件。
+2. 解压 zip 文件。
+3. 打开 Chrome 浏览器，进入扩展程序页面（chrome://extensions/）。
+4. 打开开发者模式。
+5. 点击`加载已解压的扩展程序`按钮。
+6. 选择扩展程序的根目录`sink-tool` 。
+
 ### ☀️ 截屏
 
 #### Popup Page

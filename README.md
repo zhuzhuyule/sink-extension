@@ -12,6 +12,53 @@ This is a Chrome extension that allows for quick generation and preview of short
 * Preview shortened links with quick copy functionality.
 * Log in to your Sink account to manage generated short links.
 
+
+### 🛠 Development and Debugging
+
+1. Clone the repository to your local machine
+```bash
+git clone https://github.com/zhuzhuyule/sink-extension.git
+```
+2. Enter the project directory
+```bash
+cd sink-extension
+```
+3. Install dependencies
+```bash
+pnpm install
+```
+4. Start the development server
+```bash
+pnpm dev
+# or
+pnpm build
+```
+5. Open Chrome browser and navigate to the Extensions page (chrome://extensions/).
+6. Enable Developer mode.
+7. Click the `Load unpacked extension` button.
+8. Select the root directory of the extension `./sink-tool`.
+
+### 📦 Manual Installation
+
+You can install the extension using the following steps:
+
+1. Download the [sink-tool.zip](https://github.com/zhuzhuyule/sink-extension/releases/) file.
+2. Extract the zip file.
+3. Open Chrome browser and navigate to the Extensions page (chrome://extensions/).
+4. Enable Developer mode.
+5. Click the `Load unpacked extension` button.
+6. Select the root directory of the extension `sink-tool`.
+
+
+
+### 📦 Installation
+
+1. Clone the repository: `git clone https://github.com/zhuzhuyule/sink-extension.git`
+2. Navigate to the project directory: `cd sink-extension`
+3. Install dependencies: `pnpm install`
+4. Build the extension: `pnpm build`
+5. Load the extension into Chrome: `chrome://extensions/` > `Load unpacked` > select the project directory
+
 ### ☀️ Screenshots
 
 #### Popup Page
