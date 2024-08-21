@@ -40,7 +40,7 @@ const Tag = ({ shortKey, url }: TagProps) => {
           </span>
           <div className='w-[250px] flex-1 overflow-hidden'>
             <div className='flex items-center'>
-              <div className='mr-1 truncate text-lg font-bold leading-5'>
+              <div className='mr-1 truncate text-base font-bold leading-5'>
                 {shortKey}
               </div>
               {copied ? (
