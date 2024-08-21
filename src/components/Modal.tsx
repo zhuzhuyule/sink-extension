@@ -17,7 +17,7 @@ export const Modal = ({
 }) => {
   return (
     <div
-      className={`${isOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0'} ${mask ? 'bg-black bg-opacity-50' : 'bg-transparent'} fixed inset-0 z-50 flex flex-col items-center justify-center transition-opacity duration-500`}
+      className={`${isOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0'} bg-black ${mask ? 'bg-opacity-50' : 'bg-opacity-10'} fixed inset-0 z-50 flex flex-col items-center justify-center transition-opacity duration-500`}
       onClick={maskClosable ? onClose : undefined}
     >
       <div
